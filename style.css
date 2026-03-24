@@ -1,0 +1,657 @@
+/* ===== index.html：Header（image_1）+ 地圖英雄區（image_6）+ 導覽下拉 ===== */
+
+.site-header.site-header-v2 {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  backdrop-filter: none;
+}
+
+.site-header-v2-bg {
+  background: linear-gradient(to right, #001f3f 0%, #0a3d52 45%, #004d40 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.35);
+}
+
+/* 第一列：左「CSS Logo + 副標」| 右上工具列 */
+.site-header-v2-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px 0 16px;
+  min-width: 0;
+  position: relative;
+}
+
+.brand-v2 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: left;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ===== 200×200 CSS Logo：透明發光地球 + 博士帽 + 雙線夾 imMBA ===== */
+.logo-mark {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  flex: 0 0 200px;
+  box-sizing: border-box;
+}
+
+.logo-cap {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  z-index: 4;
+  width: 88px;
+  height: 44px;
+  margin-left: -44px;
+  pointer-events: none;
+}
+
+.logo-cap-top {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 52px;
+  height: 52px;
+  margin-left: -26px;
+  background: linear-gradient(145deg, rgba(100, 200, 220, 0.95), rgba(30, 120, 150, 0.92));
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 4px;
+  transform: rotate(45deg) skew(-6deg, -6deg);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.logo-cap-board {
+  position: absolute;
+  left: 50%;
+  top: 34px;
+  width: 86px;
+  height: 14px;
+  margin-left: -43px;
+  background: linear-gradient(180deg, rgba(70, 160, 180, 0.95), rgba(25, 95, 115, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 3px;
+  transform: skewX(-8deg);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo-cap-tassel {
+  position: absolute;
+  right: 4px;
+  top: 38px;
+  width: 2px;
+  height: 22px;
+  background: linear-gradient(180deg, #f5e6a8, #d4a012);
+  border-radius: 1px;
+}
+
+.logo-cap-tassel::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  margin-left: -4px;
+  background: #ffcc33;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 204, 51, 0.7);
+}
+
+.logo-globe {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 132px;
+  height: 132px;
+  margin-left: -66px;
+  border-radius: 50%;
+  z-index: 1;
+  /* 透明中心、發光邊緣，無實心深色圓填滿 */
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.22) 0%, transparent 42%),
+    radial-gradient(circle at 50% 50%, transparent 42%, rgba(40, 240, 211, 0.12) 72%, rgba(26, 163, 255, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  box-shadow:
+    0 0 28px rgba(40, 240, 211, 0.35),
+    0 0 48px rgba(26, 163, 255, 0.18),
+    inset 0 0 24px rgba(255, 255, 255, 0.08);
+}
+
+.logo-globe-glow {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(40, 240, 211, 0.25) 0%, transparent 65%);
+  z-index: -1;
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+.logo-globe-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.logo-globe-ring--lat1 {
+  width: 118%;
+  height: 38%;
+  transform: translate(-50%, -50%);
+}
+
+.logo-globe-ring--lat2 {
+  width: 118%;
+  height: 62%;
+  transform: translate(-50%, -50%);
+}
+
+.logo-globe-ring--merid {
+  width: 42%;
+  height: 118%;
+  transform: translate(-50%, -50%);
+}
+
+/* 地球儀中央：上線 + imMBA + 下線 */
+.logo-mid-band {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 118px;
+  pointer-events: none;
+}
+
+.logo-rule {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25) 12%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(255, 255, 255, 0.25) 88%,
+    transparent
+  );
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.35);
+}
+
+.logo-title-inner {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 1.45rem;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(40, 240, 211, 0.45);
+  font-family: Inter, "Noto Sans TC", system-ui, sans-serif;
+}
+
+.brand-v2-subtitle--aside {
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 1.8rem;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.06em;
+  max-width: min(42ch, 100%);
+}
+
+/* 其他頁面若仍使用 SVG 圖檔 Logo（例如 en.html） */
+.brand-v2-logo-wrap {
+  width: 200px;
+  height: 200px;
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.brand-v2-logo {
+  width: 200px !important;
+  height: 200px !important;
+  min-width: 200px;
+  min-height: 200px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.brand-v2-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.brand-v2-title {
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+}
+
+.brand-v2-subtitle:not(.brand-v2-subtitle--aside) {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.05rem;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  max-width: 42ch;
+}
+
+/* 右上工具列 */
+.header-util-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  top: 24px;
+  right: -42px;
+}
+
+.header-util-bar a {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.header-util-bar a:hover {
+  text-decoration: underline;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.header-util-sep {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 15px;
+  font-weight: 400;
+  user-select: none;
+}
+
+/* 黑底導覽列 */
+.site-header-v2-nav-wrap {
+  background: #000000;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 10px 0 12px;
+}
+
+.site-header-v2-nav-inner {
+  min-width: 0;
+}
+
+.nav-v2 {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  min-width: 0;
+}
+
+.nav-v2-main {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 4px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  min-width: 0;
+}
+
+.nav-v2-item {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.nav-v2 .nav-v2-item > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 11px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 14px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.nav-v2 .nav-v2-item > a:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-v2-chev {
+  margin-left: 4px;
+  font-size: 10px;
+  opacity: 0.85;
+}
+
+/* 下拉選單（招生／課程） */
+.nav-v2-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 200;
+  min-width: 240px;
+  margin: 4px 0 0;
+  padding: 8px 0;
+  list-style: none;
+  background: #141820;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.nav-v2-item--has-sub:hover > .nav-v2-dropdown,
+.nav-v2-item--has-sub:focus-within > .nav-v2-dropdown {
+  display: block;
+}
+
+.nav-v2-dropdown a {
+  display: block;
+  padding: 10px 16px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.nav-v2-dropdown a:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* ===== 地圖英雄區（image_6）===== */
+.hero-map-banner {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.hero-map-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  min-height: min(52vw, 420px);
+  max-width: 100%;
+}
+
+.hero-map-left {
+  flex: 0 0 35%;
+  max-width: 35%;
+  background: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 20px;
+  box-sizing: border-box;
+}
+
+.hero-map-img {
+  width: 100%;
+  height: 100%;
+  max-height: 380px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.hero-map-right {
+  flex: 1 1 65%;
+  position: relative;
+  background: #1a7c8c;
+  padding: 36px clamp(24px, 4vw, 48px) 28px;
+  /* Reserve explicit room for the two right-side buttons */
+  padding-right: clamp(230px, 28vw, 320px);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.hero-map-body {
+  flex: 1;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.hero-map-title {
+  margin: 0 0 20px;
+  color: #ffffff;
+  font-size: clamp(2.2rem, 3.6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0.02em;
+}
+
+.hero-map-list {
+  margin: 0 0 20px;
+  padding: 0;
+  list-style: none;
+  color: #ffffff;
+  font-size: clamp(0.95rem, 1.35vw, 1.05rem);
+  line-height: 1.55;
+}
+
+.hero-map-list > li {
+  position: relative;
+  margin-bottom: 10px;
+  padding-left: 1.1em;
+}
+
+.hero-map-list > li::before {
+  content: "★";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffffff;
+  font-size: 0.85em;
+}
+
+.hero-map-li-inner {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 12px;
+}
+
+.hero-map-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #f5e6a8;
+  color: #c41212;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.hero-map-footnote {
+  margin: 0;
+  color: #f0ff00;
+  font-size: clamp(0.85rem, 1.2vw, 0.98rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* 右緣直向並列按鈕 */
+.hero-map-side-btns {
+  position: absolute;
+  right: clamp(30px, 4.5vw, 56px);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 2;
+}
+
+.hero-map-side-btn {
+  display: block;
+  width: 200px;
+  min-width: 200px;
+  padding: 12px 14px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0b1e2a;
+  text-decoration: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.92);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  writing-mode: horizontal-tb;
+}
+
+.hero-map-side-btn:hover {
+  background: #ffffff;
+  color: #062436;
+}
+
+.hero-map-side-btn--primary {
+  background: linear-gradient(180deg, #ffe566 0%, #f0c830 100%);
+  border-color: #e8b800;
+  color: #1a1200;
+}
+
+.hero-map-side-btn--primary:hover {
+  filter: brightness(1.05);
+}
+
+/* 英雄區下方公告帶 */
+.hero-cards-band {
+  padding: 28px 0 8px;
+}
+
+.hero-cards-band .hero-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  max-width: 100%;
+}
+
+.footer-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+/* 舊站殘留 class 隱藏 */
+.site-header-v2 .dropdown-menu,
+.site-header-v2 .nav-cta,
+.site-header-v2 .nav-toggle,
+.site-header-v2 .header-top,
+.site-header-v2 .navwrap {
+  display: none !important;
+}
+
+@media (max-width: 900px) {
+  .hero-map-grid {
+    flex-direction: column;
+    min-height: 0;
+  }
+  .hero-map-left {
+    flex: 0 0 auto;
+    max-width: 100%;
+    width: 100%;
+    min-height: 220px;
+  }
+  .hero-map-right {
+    flex: 1 1 auto;
+    width: 100%;
+    padding: 28px 20px 80px;
+  }
+  .hero-map-side-btns {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding-right: 0;
+  }
+  .hero-map-side-btn {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 860px) {
+  .site-header-v2-top {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .header-util-bar {
+    width: auto;
+    justify-content: flex-end;
+    order: 3;
+    top: 18px;
+    right: -28px;
+  }
+  .brand-v2 {
+    order: 1;
+    flex: 1 1 100%;
+  }
+  .nav-v2-main {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-v2 {
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 14px;
+  }
+  .logo-mark {
+    width: 200px;
+    height: 200px;
+    flex: 0 0 200px;
+  }
+  .brand-v2-subtitle--aside {
+    font-size: 1.3rem;
+    max-width: none;
+    flex: 1 1 100%;
+  }
+  .header-util-bar a {
+    font-size: 14px;
+  }
+  .hero-map-side-btns {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-map-side-btn {
+    width: 100%;
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "common": {
+    "search": "Search",
+    "searchPlaceholder": "Type keywords",
+    "cancel": "Cancel",
+    "more": "More",
+    "applyNow": "Apply now",
+    "backToTop": "Back to top",
+    "siteSubtitle": "International Master of Business Administration (imMBA)"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "admissions": "Admissions",
+    "academics": "Academics",
+    "faculty": "Faculty",
+    "guide": "imMBA Guide",
+    "graduation": "Graduation & Departure",
+    "dualDegree": "Dual Degree",
+    "exchange": "Exchange",
+    "gallery": "Gallery",
+    "announcements": "Announcements",
+    "downloads": "Downloads",
+    "contact": "Contact",
+    "college": "College of Management",
+    "en": "EN"
+  },
+  "home": {
+    "kicker": "International, rigorous, and practice-oriented",
+    "title": "Fu Jen Catholic University imMBA (100% English-taught)",
+    "lead": "An English-taught MBA program with global exposure and strong industry connections.",
+    "actions": { "latest": "Latest announcements", "about": "About imMBA" },
+    "metrics": {
+      "english": "English-taught",
+      "partnersK": "Global",
+      "partnersV": "Partnerships",
+      "careerK": "Career",
+      "careerV": "Practice-driven"
+    },
+    "announcements": { "title": "Announcements" },
+    "gallery": { "title": "Photo highlights", "note": "This is a placeholder area—replace it with real photos later." }
+  },
+  "footer": {
+    "school": "College of Management · Fu Jen Catholic University",
+    "links": "Links",
+    "noteTitle": "Note",
+    "note": "This is a rebuilt template based on the old site’s structure. Content can be refined and updated."
+  },
+  "pages": {
+    "home": {
+      "h2": "Quick start",
+      "p": "This rebuilt site keeps the old site’s core structure and key sections: announcements, admissions, academics & regulations, faculty, exchange/dual degree, downloads, and contact. The language switch updates the whole site in sync.",
+      "tiles": [
+        { "t": "Admissions", "d": "Application timeline, interviews, scholarships, and international admissions." },
+        { "t": "Academics & Regulations", "d": "Curriculum structure, graduation requirements, and resources." },
+        { "t": "Exchange / Dual Degree", "d": "Partner options and process highlights." },
+        { "t": "Downloads", "d": "Centralized forms and documents (replace with real links)." }
+      ]
+    },
+    "announcements": {
+      "h2": "Announcements",
+      "p": "A curated list based on the old homepage announcements (you can add categories, pinning, search, and pagination)."
+    },
+    "about.intro": {
+      "h2": "About",
+      "p": "Program positioning, highlights, and learning environment."
+    },
+    "about.features": {
+      "h2": "Features & ranking",
+      "p": "Showcase global curriculum, faculty strengths, industry links, alumni, and rankings/accreditations."
+    },
+    "about.rules": {
+      "h2": "Policies & regulations",
+      "p": "Organize study regulations, course selection, thesis/project, credit transfer, etc."
+    },
+    "about.environment": {
+      "h2": "Learning environment",
+      "p": "Space, resources, and campus life."
+    },
+    "admissions": {
+      "h2": "Admissions",
+      "p": "Admissions information including MBA admissions and scholarships (add international admissions details as needed).",
+      "mba": {
+        "h2": "MBA admissions",
+        "p": "Application timeline, interviews, requirements, and reminders."
+      },
+      "scholarships": {
+        "h2": "Scholarships",
+        "p": "Scholarship/financial aid options and application information."
+      }
+    },
+    "academics": {
+      "h2": "Academics",
+      "p": "Academics information including curriculum and study regulations.",
+      "curriculum": {
+        "h2": "Curriculum & regulations",
+        "p": "Course map, required/elective courses, credits, graduation requirements, and policies."
+      }
+    },
+    "faculty": {
+      "h2": "Faculty",
+      "p": "Faculty list, research areas, contact, and profile links."
+    },
+    "guide": {
+      "h2": "imMBA guide",
+      "p": "FAQ, admin processes, learning resources, and student life tips."
+    },
+    "graduation": {
+      "h2": "Graduation & departure",
+      "p": "Requirements, check-out process, forms, and reminders."
+    },
+    "dualDegree": {
+      "h2": "Dual degree",
+      "p": "Partner schools, application process, and FAQs."
+    },
+    "exchange": {
+      "h2": "Exchange",
+      "p": "Partner schools, timeline, documents, and sharing."
+    },
+    "gallery": {
+      "h2": "Gallery",
+      "p": "Organize photos by year/activity (placeholder for now)."
+    },
+    "downloads": {
+      "h2": "Downloads",
+      "p": "Central place for frequently used forms. Add real file links from the old site."
+    },
+    "contact": {
+      "h2": "Contact",
+      "p": "Add phone, email, address, transportation, and office hours."
+    }
+  }
+}

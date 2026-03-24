@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+  width="200"
+  height="200"
+  viewBox="0 0 200 200"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="imMBA logo"
+>
+  <defs>
+    <linearGradient id="gGlobe" x1="22" y1="78" x2="94" y2="142" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0D3D4A" />
+      <stop offset="0.45" stop-color="#135A6B" />
+      <stop offset="1" stop-color="#0A2F38" />
+    </linearGradient>
+    <radialGradient id="gGlobeHi" cx="45%" cy="38%" r="55%" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#28F0D3" stop-opacity="0.35" />
+      <stop offset="0.55" stop-color="#1AA3FF" stop-opacity="0.12" />
+      <stop offset="1" stop-color="#28F0D3" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="gStroke" x1="20" y1="160" x2="180" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#28F0D3" />
+      <stop offset="0.55" stop-color="#1AA3FF" />
+      <stop offset="1" stop-color="#28F0D3" />
+    </linearGradient>
+    <linearGradient id="gCap" x1="34" y1="52" x2="82" y2="78" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1A6B7A" />
+      <stop offset="0.5" stop-color="#28F0D3" />
+      <stop offset="1" stop-color="#135A6B" />
+    </linearGradient>
+    <linearGradient id="gText" x1="90" y1="120" x2="190" y2="80" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#EAFBFF" />
+      <stop offset="0.5" stop-color="#BFF8EE" />
+      <stop offset="1" stop-color="#DDEBFF" />
+    </linearGradient>
+    <filter id="fGlow" x="-35%" y="-35%" width="170%" height="170%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2" result="b" />
+      <feColorMatrix
+        in="b"
+        type="matrix"
+        values="
+          1 0 0 0 0
+          0 1 0 0 0
+          0 0 1 0 0
+          0 0 0 0.32 0"
+        result="g"
+      />
+      <feMerge>
+        <feMergeNode in="g" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    <clipPath id="clipGlobe">
+      <circle cx="58" cy="110" r="36" />
+    </clipPath>
+  </defs>
+
+  <!-- Sphere -->
+  <g filter="url(#fGlow)">
+    <circle cx="58" cy="110" r="36" fill="url(#gGlobe)" />
+    <circle cx="58" cy="110" r="36" fill="url(#gGlobeHi)" />
+  </g>
+
+  <!-- Two semi-transparent lines wrapping the sphere (clipped to sphere = wrap effect) -->
+  <g clip-path="url(#clipGlobe)">
+    <ellipse
+      cx="58"
+      cy="110"
+      rx="52"
+      ry="19"
+      stroke="url(#gStroke)"
+      stroke-width="2.8"
+      stroke-linecap="round"
+      opacity="0.44"
+      transform="rotate(-24 58 110)"
+    />
+    <ellipse
+      cx="58"
+      cy="110"
+      rx="52"
+      ry="19"
+      stroke="url(#gStroke)"
+      stroke-width="2.2"
+      stroke-linecap="round"
+      opacity="0.34"
+      transform="rotate(36 58 110)"
+    />
+  </g>
+
+  <!-- Doctoral cap (mortarboard + tassel) on top of sphere -->
+  <g filter="url(#fGlow)">
+    <!-- Cap band resting on globe -->
+    <ellipse cx="58" cy="76" rx="22" ry="7" fill="#0E4A56" stroke="url(#gStroke)" stroke-width="1.2" opacity="0.95" />
+    <!-- Square top (perspective) -->
+    <path
+      d="M 36 72 L 58 60 L 80 72 L 58 82 Z"
+      fill="url(#gCap)"
+      stroke="url(#gStroke)"
+      stroke-width="1.4"
+      stroke-linejoin="round"
+    />
+    <!-- Tassel cord + puff -->
+    <path d="M 72 66 L 78 88" stroke="#E8B84A" stroke-width="2" stroke-linecap="round" />
+    <circle cx="78" cy="90" r="3.2" fill="#FFCC33" stroke="#C9A227" stroke-width="0.6" />
+  </g>
+
+  <!-- Wordmark -->
+  <text
+    x="120"
+    y="131"
+    fill="url(#gText)"
+    font-size="36"
+    font-weight="700"
+    font-family="Inter, 'Noto Sans TC', system-ui, -apple-system, 'Segoe UI', Roboto, Arial"
+    letter-spacing="0.2"
+  >
+    imMBA
+  </text>
+</svg>
