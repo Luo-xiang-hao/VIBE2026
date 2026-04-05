@@ -1,0 +1,219 @@
+/**
+ * 與 src/pages/admin-shell.css 同步（靜態 admin/*.html）
+ */
+.imo-shell {
+  margin: 0;
+  --imo-a: #28f0d3;
+  --imo-border: rgba(255, 255, 255, 0.12);
+  --imo-surface: rgba(255, 255, 255, 0.08);
+
+  min-height: 100vh;
+  font-family: Inter, "Noto Sans TC", system-ui, sans-serif;
+  color: rgba(255, 255, 255, 0.92);
+  -webkit-font-smoothing: antialiased;
+  background: radial-gradient(1200px 600px at 15% 10%, rgba(26, 163, 255, 0.36), transparent 60%),
+    radial-gradient(900px 520px at 85% 12%, rgba(40, 240, 211, 0.28), transparent 55%),
+    radial-gradient(900px 520px at 60% 88%, rgba(255, 204, 51, 0.16), transparent 55%),
+    linear-gradient(180deg, #070b13 0%, #0b1220 60%, #070b13 100%);
+}
+
+.imo-topbar {
+  background: linear-gradient(to right, #001f3f 0%, #0a3d52 45%, #004d40 100%);
+  color: #fff;
+  padding: 1rem 1.15rem 1.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.35);
+}
+
+.imo-topbar__inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+.imo-topbar__title {
+  margin: 0;
+  font-size: clamp(1.15rem, 2.2vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+}
+
+.imo-topbar__lead {
+  margin: 0.4rem 0 0;
+  max-width: 48rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.imo-topbar__lead code {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  font-family: ui-monospace, monospace;
+}
+
+.imo-topbar__links {
+  margin-top: 0.65rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.imo-topbar__links a {
+  color: var(--imo-a);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.imo-topbar__links a:hover {
+  color: #fff;
+}
+
+.imo-tabs-wrap {
+  background: #000000;
+  border-bottom: 1px solid var(--imo-border);
+  border-top: 1px solid var(--imo-border);
+}
+
+.imo-tabs {
+  max-width: 72rem;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  padding: 0.55rem 1rem 0.6rem;
+}
+
+.imo-tabs .imo-tab {
+  display: inline-block;
+  padding: 0.42rem 0.95rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+  font-family: inherit;
+  color: rgba(255, 255, 255, 0.95);
+  text-decoration: none;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a.imo-tab:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+a.imo-tab--active,
+span.imo-tab--active {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.95) !important;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+span.imo-tab--active {
+  cursor: default;
+}
+
+.imo-workspace__inner {
+  box-sizing: border-box;
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0.65rem 0.85rem 1.75rem;
+}
+
+.imo-section-card {
+  background: var(--imo-surface);
+  border-radius: 12px;
+  padding: 0.85rem 1rem 0.95rem;
+  margin-bottom: 0.65rem;
+  border: 1px solid var(--imo-border);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.imo-section-card__inner {
+  max-width: 100%;
+}
+
+.imo-section-card strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.imo-section-bar__title {
+  margin: 0 0 0.3rem;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.imo-section-bar__text {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.82);
+  max-width: 100%;
+}
+
+.imo-section-bar__text code {
+  font-size: 0.7rem;
+  padding: 0.08rem 0.32rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.35);
+  font-family: ui-monospace, monospace;
+}
+
+.imo-section-bar__nav {
+  margin-top: 0.55rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.imo-section-bar__nav a {
+  color: var(--imo-a);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.imo-section-bar__nav a:hover {
+  color: #fff;
+}
+
+.imo-workspace__body {
+  background: var(--imo-surface);
+  border-radius: 12px;
+  border: 1px solid var(--imo-border);
+  padding: 0.75rem 0.85rem 1rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+}
+
+.imo-main {
+  margin: 0;
+  padding: 0;
+}
+
+.imo-content {
+  max-width: 48rem;
+  margin: 0 auto;
+  padding: 0.65rem 0.85rem 1.75rem;
+}
+
+.imo-paper {
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+}

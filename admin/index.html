@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <script>
+      (function () {
+        try {
+          if (new URLSearchParams(location.search).get("embed") === "1") {
+            document.documentElement.classList.add("admin-embed");
+          } else {
+            document.documentElement.classList.add("admin-standalone-news");
+          }
+        } catch (e) {}
+      })();
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>imMBA 公告管理後台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ["Inter", "Noto Sans TC", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="shell.css" />
+    <link rel="stylesheet" href="home-logo.css" />
+    <link rel="stylesheet" href="admin.css" />
+  </head>
+  <body>
+    <script>
+      (function () {
+        if (document.documentElement.classList.contains("admin-embed")) {
+          document.body.className = "admin-page admin-embed";
+        } else {
+          document.body.className = "imo-shell admin-news-standalone";
+        }
+      })();
+    </script>
+
+    <div class="admin-html-chrome">
+      <header class="imo-topbar">
+        <div class="imo-topbar__inner">
+          <div class="imo-topbar__brand">
+            <div class="imo-home-logo-scale imo-home-logo-scale--topbar" aria-hidden="true">
+              <div class="logo-mark">
+                <div class="logo-cap">
+                  <span class="logo-cap-top"></span>
+                  <span class="logo-cap-board"></span>
+                  <span class="logo-cap-tassel"></span>
+                </div>
+                <div class="logo-globe">
+                  <span class="logo-globe-glow"></span>
+                  <span class="logo-globe-ring logo-globe-ring--lat1"></span>
+                  <span class="logo-globe-ring logo-globe-ring--lat2"></span>
+                  <span class="logo-globe-ring logo-globe-ring--merid"></span>
+                  <div class="logo-mid-band">
+                    <span class="logo-rule"></span>
+                    <span class="logo-title-inner">imMBA</span>
+                    <span class="logo-rule"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="imo-topbar__brand-text">
+              <h1 class="imo-topbar__title">imMBA 總後台管理</h1>
+              <p class="imo-topbar__lead">
+                整合公告、活動集錦等模組；各模組資料存於瀏覽器
+                <code>localStorage</code>（鍵名依功能而異）。活動集錦請以
+                <code>immba-pure.html#events-admin</code> 為主（純 HTML 後台）；亦可用 React 版
+                <code>react.html#/admin/events</code>。
+              </p>
+            </div>
+          </div>
+          <div class="imo-topbar__links">
+            <a href="../index.html">開啟前台 index.html</a>
+            <a href="../immba-pure.html">純 HTML 活動頁</a>
+            <a href="../announcements.html">中文公告索引</a>
+            <a href="./dashboard.html">HTML 後台總覽</a>
+            <a href="../react.html#/">返回前台首頁（React）</a>
+          </div>
+        </div>
+      </header>
+
+      <div class="imo-tabs-wrap">
+        <div class="imo-tabs" role="tablist" aria-label="後台模組">
+          <a class="imo-tab" role="tab" href="./dashboard.html">總覽</a>
+          <span class="imo-tab imo-tab--active" role="tab" aria-current="page">公告管理</span>
+          <a class="imo-tab" role="tab" href="../immba-pure.html#events-admin">活動集錦管理</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="imo-workspace">
+      <div class="imo-workspace__inner">
+        <div class="imo-section-card">
+          <div class="imo-section-card__inner">
+            <h2 class="imo-section-bar__title">imMBA 公告管理後台（中英同一介面）</h2>
+            <p class="imo-section-bar__text">
+              與前台共用資料結構（<code>titleZh</code> / <code>titleEn</code>）。輸入中文標題後，右欄會<strong
+                >自動預覽英文翻譯</strong
+              >；儲存時寫入與預覽一致之英文（若中文臨時有改、預覽尚未更新，儲存時會再翻譯一次）。資料儲存在瀏覽器
+              <code>localStorage</code>，鍵名
+              <code>vibe2026_immba_announcements</code>。
+            </p>
+            <nav class="imo-section-bar__nav" aria-label="捷徑">
+              <a href="./dashboard.html">後台總覽</a>
+              <a href="../index.html">開啟前台 index.html</a>
+              <a href="../announcements.html">中文公告索引</a>
+              <a href="../announcements-en.html">英文 News 索引</a>
+            </nav>
+          </div>
+        </div>
+        <div class="imo-workspace__body">
+          <main class="imo-main admin-news-main">
+      <!-- 主表單卡片 -->
+      <section class="admin-panel p-6">
+        <input type="hidden" id="editingId" value="" />
+
+        <div class="grid gap-5 md:grid-cols-2 md:gap-6">
+          <div>
+            <label for="titleZh" class="mb-1.5 block text-sm font-semibold text-slate-200"
+              >中文標題（必填）</label
+            >
+            <input
+              id="titleZh"
+              type="text"
+              class="admin-input w-full rounded-xl border px-4 py-2.5 text-sm transition"
+              placeholder="輸入中文公告標題…"
+              autocomplete="off"
+            />
+          </div>
+          <div>
+            <div class="mb-1.5 flex flex-wrap items-center justify-between gap-2">
+              <label for="titleEnPreview" class="text-sm font-semibold text-slate-200"
+                >英文標題（預覽）</label
+              >
+              <button
+                type="button"
+                id="btnPreviewTranslate"
+                class="rounded-lg border border-cyan-400/35 bg-cyan-500/10 px-3 py-1 text-xs font-semibold text-cyan-200 transition hover:bg-cyan-500/20"
+              >
+                重新預覽翻譯
+              </button>
+            </div>
+            <input
+              id="titleEnPreview"
+              type="text"
+              readonly
+              class="admin-input w-full min-w-0 rounded-xl border px-4 py-2.5 text-sm transition"
+              placeholder="輸入中文後，將自動顯示機翻英文預覽…"
+              aria-readonly="true"
+            />
+            <p id="titleEnPreviewStatus" class="mt-1.5 min-h-[1.25rem] text-xs text-slate-500"></p>
+          </div>
+        </div>
+
+        <div class="mt-6 grid gap-6 md:grid-cols-2">
+          <div>
+            <label for="urlZh" class="mb-1.5 block text-sm font-semibold text-slate-200">中文公告詳情連結</label>
+            <input
+              id="urlZh"
+              type="url"
+              class="admin-input w-full rounded-xl border px-4 py-2.5 text-sm transition"
+              placeholder="https://www.management.fju.edu.tw/subweb/immba/..."
+            />
+            <p id="urlZhHint" class="mt-1 hidden text-xs text-rose-400"></p>
+          </div>
+          <div>
+            <label for="urlEn" class="mb-1.5 block text-sm font-semibold text-slate-200">英文公告詳情連結</label>
+            <input
+              id="urlEn"
+              type="url"
+              class="admin-input w-full rounded-xl border px-4 py-2.5 text-sm transition"
+              placeholder="https://www.management.fju.edu.tw/esubweb/immbaengindex/..."
+            />
+            <p id="urlEnHint" class="mt-1 hidden text-xs text-rose-400"></p>
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p class="text-sm font-medium text-slate-200">發布日期</p>
+            <p class="mt-1 text-sm text-slate-400">
+              新增時預設為今天（可修改）；編輯時保留原日期。
+            </p>
+            <input
+              id="pubDate"
+              type="text"
+              pattern="\d{4}/\d{1,2}/\d{1,2}"
+              class="admin-input mt-2 w-full max-w-[200px] rounded-xl border px-4 py-2 text-sm font-mono sm:w-auto"
+              placeholder="YYYY/MM/DD"
+            />
+            <p id="dateTodayNote" class="mt-1 text-xs text-slate-500"></p>
+          </div>
+          <div class="flex flex-col items-stretch gap-3 sm:items-end">
+            <button
+              type="button"
+              id="btnSave"
+              class="rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 text-sm font-bold text-white shadow-md transition hover:from-cyan-400 hover:to-blue-500 hover:shadow-lg disabled:opacity-50"
+            >
+              新增／儲存
+            </button>
+            <p class="max-w-md text-right text-xs text-slate-400">
+              右欄可先確認英文預覽再儲存；連結須為 http(s) 格式。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 底部工具 -->
+      <section class="admin-panel mt-6 p-5">
+        <div class="flex flex-wrap gap-3">
+          <button
+            type="button"
+            id="btnReimport"
+            class="rounded-xl border border-amber-400/35 bg-amber-500/15 px-4 py-2.5 text-sm font-semibold text-amber-100 transition hover:bg-amber-500/25"
+          >
+            重新匯入官網中英配對清單（覆蓋）
+          </button>
+          <button
+            type="button"
+            id="btnExport"
+            class="rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-slate-100 transition hover:bg-white/10"
+          >
+            匯出 announcements.json
+          </button>
+          <button
+            type="button"
+            id="btnClear"
+            class="rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 px-8 py-3 text-sm font-bold text-white shadow-md transition hover:from-cyan-400 hover:to-blue-500 hover:shadow-lg"
+          >
+            清空全部公告
+          </button>
+        </div>
+        <p id="statusMsg" class="mt-3 text-sm text-slate-300" role="status"></p>
+      </section>
+
+      <!-- 列表 -->
+      <section class="admin-panel mt-8 overflow-hidden p-0">
+        <div class="border-b border-white/10 px-5 py-3">
+          <h2 class="text-base font-bold text-slate-100">已儲存公告</h2>
+          <p class="text-xs text-slate-400">
+            點「編輯」帶回上方表單；「刪除」需確認。中文／英文連結欄可新分頁開啟官網詳情頁。
+          </p>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full min-w-[960px] text-left text-sm">
+            <thead class="bg-white/[0.04] text-xs font-semibold uppercase tracking-wide text-slate-400">
+              <tr>
+                <th class="px-4 py-3">日期</th>
+                <th class="px-4 py-3">中文標題</th>
+                <th class="px-4 py-3">英文標題</th>
+                <th class="px-4 py-3 whitespace-nowrap">中文連結</th>
+                <th class="px-4 py-3 whitespace-nowrap">英文連結</th>
+                <th class="px-4 py-3 text-right">操作</th>
+              </tr>
+            </thead>
+            <tbody id="tbody" class="divide-y divide-white/10"></tbody>
+          </table>
+        </div>
+      </section>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <script src="../assets/announcements-embed.js"></script>
+    <script>
+      (function () {
+        var STORAGE_KEY = "vibe2026_immba_announcements";
+        var LEGACY_KEYS = ["immba_admin_announcements_v2", "immba_admin_announcements_v1"];
+        var lastPreviewZh = "";
+        var lastPreviewEn = "";
+        var previewDebounceTimer = null;
+
+        function pad2(n) {
+          return n < 10 ? "0" + n : String(n);
+        }
+        function todayStr() {
+          var d = new Date();
+          return d.getFullYear() + "/" + pad2(d.getMonth() + 1) + "/" + pad2(d.getDate());
+        }
+
+        function migrateItem(raw) {
+          if (!raw) return null;
+          if (raw.titleZh !== undefined || raw.titleEn !== undefined) {
+            return {
+              id: raw.id || crypto.randomUUID(),
+              date: raw.date || todayStr(),
+              isTop: !!raw.isTop,
+              titleZh: raw.titleZh || raw.title || "",
+              titleEn: raw.titleEn || "",
+              urlZh: (raw.urlZh != null && raw.urlZh !== "") ? raw.urlZh : raw.url || "",
+              urlEn: raw.urlEn || "",
+            };
+          }
+          return {
+            id: raw.id || crypto.randomUUID(),
+            date: raw.date || todayStr(),
+            isTop: !!raw.isTop,
+            titleZh: raw.title || "",
+            titleEn: raw.titleEn || "",
+            urlZh: raw.url || "",
+            urlEn: raw.urlEn || "",
+          };
+        }
+
+        function loadRaw() {
+          try {
+            var raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) {
+              var o = JSON.parse(raw);
+              if (o && Array.isArray(o.announcements))
+                return { announcements: o.announcements.map(migrateItem).filter(Boolean) };
+            }
+          } catch (e) {}
+          for (var i = 0; i < LEGACY_KEYS.length; i++) {
+            try {
+              var old = localStorage.getItem(LEGACY_KEYS[i]);
+              if (!old) continue;
+              var o2 = JSON.parse(old);
+              if (o2 && Array.isArray(o2.announcements) && o2.announcements.length) {
+                var m = { announcements: o2.announcements.map(migrateItem).filter(Boolean) };
+                saveRaw(m);
+                if (LEGACY_KEYS[i] !== STORAGE_KEY) localStorage.removeItem(LEGACY_KEYS[i]);
+                return m;
+              }
+            } catch (e2) {}
+          }
+          return { announcements: [] };
+        }
+
+        function saveRaw(data) {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        function getStore() {
+          return loadRaw();
+        }
+
+        function setStore(data) {
+          saveRaw(data);
+        }
+
+        function parseAnnounceDate(s) {
+          if (!s) return 0;
+          var m = String(s).trim().match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
+          if (!m) return 0;
+          return new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3])).getTime();
+        }
+
+        function sortList(list) {
+          return list.slice().sort(function (a, b) {
+            var topDiff = (b.isTop ? 1 : 0) - (a.isTop ? 1 : 0);
+            if (topDiff !== 0) return topDiff;
+            return parseAnnounceDate(b.date) - parseAnnounceDate(a.date);
+          });
+        }
+
+        function isValidHttpUrl(s) {
+          s = (s || "").trim();
+          if (!s) return true;
+          try {
+            var u = new URL(s);
+            return u.protocol === "http:" || u.protocol === "https:";
+          } catch (e) {
+            return false;
+          }
+        }
+
+        function translateZhToEn(text) {
+          text = (text || "").trim();
+          if (!text) return Promise.resolve("");
+          var chunkSize = 400;
+          var parts = [];
+          for (var i = 0; i < text.length; i += chunkSize) parts.push(text.slice(i, i + chunkSize));
+          var out = [];
+          return parts
+            .reduce(function (chain, seg) {
+              return chain.then(function () {
+                var url =
+                  "https://api.mymemory.translated.net/get?q=" +
+                  encodeURIComponent(seg) +
+                  "&langpair=zh|en";
+                return fetch(url)
+                  .then(function (r) {
+                    return r.json();
+                  })
+                  .then(function (data) {
+                    if (
+                      data.responseStatus === 200 &&
+                      data.responseData &&
+                      data.responseData.translatedText
+                    ) {
+                      out.push(data.responseData.translatedText);
+                    } else {
+                      throw new Error(data.responseDetails || "translate error");
+                    }
+                  })
+                  .then(function () {
+                    return new Promise(function (res) {
+                      setTimeout(res, 350);
+                    });
+                  });
+              });
+            }, Promise.resolve())
+            .then(function () {
+              return out.join("");
+            });
+        }
+
+        function setPreviewStatus(msg, isError) {
+          titleEnPreviewStatus.textContent = msg || "";
+          titleEnPreviewStatus.className =
+            "mt-1.5 min-h-[1.25rem] text-xs " + (isError ? "text-rose-400" : "text-slate-500");
+        }
+
+        function scheduleTitlePreview() {
+          clearTimeout(previewDebounceTimer);
+          var zh = titleZh.value.trim();
+          if (!zh) {
+            titleEnPreview.value = "";
+            lastPreviewZh = "";
+            lastPreviewEn = "";
+            setPreviewStatus("");
+            return;
+          }
+          setPreviewStatus("將於片刻後自動預覽翻譯…");
+          previewDebounceTimer = setTimeout(function () {
+            runPreviewTranslate(false);
+          }, 600);
+        }
+
+        /** @param {boolean} alertOnFail 手動按「重新預覽」時設 true，失敗會 alert */
+        function runPreviewTranslate(alertOnFail) {
+          var zh = titleZh.value.trim();
+          if (!zh) {
+            titleEnPreview.value = "";
+            lastPreviewZh = "";
+            lastPreviewEn = "";
+            setPreviewStatus("");
+            return Promise.resolve();
+          }
+          setPreviewStatus("正在取得英文預覽…");
+          return translateZhToEn(zh)
+            .then(function (en) {
+              var t = (en || "").trim();
+              titleEnPreview.value = t;
+              lastPreviewZh = zh;
+              lastPreviewEn = t;
+              setPreviewStatus(
+                "已更新預覽。儲存時會寫入此英文標題（若您又改了中文，請等預覽更新或按「重新預覽翻譯」）。"
+              );
+            })
+            .catch(function (e) {
+              lastPreviewZh = "";
+              lastPreviewEn = "";
+              var msg = e && e.message ? e.message : String(e);
+              setPreviewStatus("預覽翻譯失敗：" + msg, true);
+              if (alertOnFail) {
+                alert("英文預覽失敗：" + msg + "\n請檢查網路後再試。");
+              }
+            });
+        }
+
+        var editingId = document.getElementById("editingId");
+        var titleZh = document.getElementById("titleZh");
+        var urlZh = document.getElementById("urlZh");
+        var urlEn = document.getElementById("urlEn");
+        var pubDate = document.getElementById("pubDate");
+        var urlZhHint = document.getElementById("urlZhHint");
+        var urlEnHint = document.getElementById("urlEnHint");
+        var dateTodayNote = document.getElementById("dateTodayNote");
+        var tbody = document.getElementById("tbody");
+        var statusMsg = document.getElementById("statusMsg");
+        var titleEnPreview = document.getElementById("titleEnPreview");
+        var titleEnPreviewStatus = document.getElementById("titleEnPreviewStatus");
+        var btnPreviewTranslate = document.getElementById("btnPreviewTranslate");
+        var btnSave = document.getElementById("btnSave");
+        var btnReimport = document.getElementById("btnReimport");
+        var btnExport = document.getElementById("btnExport");
+        var btnClear = document.getElementById("btnClear");
+
+        function setStatus(msg, ok) {
+          statusMsg.textContent = msg || "";
+          statusMsg.className =
+            "mt-3 text-sm " +
+            (ok === false ? "text-rose-300" : ok === true ? "text-emerald-300" : "text-slate-300");
+        }
+
+        function clearFormForNew() {
+          editingId.value = "";
+          titleZh.value = "";
+          titleEnPreview.value = "";
+          lastPreviewZh = "";
+          lastPreviewEn = "";
+          clearTimeout(previewDebounceTimer);
+          previewDebounceTimer = null;
+          setPreviewStatus("");
+          urlZh.value = "";
+          urlEn.value = "";
+          pubDate.value = todayStr();
+          dateTodayNote.textContent = "今日日期：" + todayStr();
+          urlZhHint.classList.add("hidden");
+          urlEnHint.classList.add("hidden");
+        }
+
+        function validateUrls() {
+          var ok = true;
+          urlZhHint.classList.add("hidden");
+          urlEnHint.classList.add("hidden");
+          if (!isValidHttpUrl(urlZh.value)) {
+            urlZhHint.textContent = "請輸入有效的 http(s) 網址或留空";
+            urlZhHint.classList.remove("hidden");
+            ok = false;
+          }
+          if (!isValidHttpUrl(urlEn.value)) {
+            urlEnHint.textContent = "請輸入有效的 http(s) 網址或留空";
+            urlEnHint.classList.remove("hidden");
+            ok = false;
+          }
+          return ok;
+        }
+
+        function validateDate() {
+          return /^\d{4}\/\d{1,2}\/\d{1,2}$/.test((pubDate.value || "").trim());
+        }
+
+        function renderTable() {
+          var data = getStore();
+          var rows = sortList(data.announcements || []);
+          tbody.innerHTML = "";
+          rows.forEach(function (a) {
+            var tr = document.createElement("tr");
+            tr.className = "hover:bg-white/[0.04]";
+            var zhT = (a.titleZh || "").length > 40 ? (a.titleZh || "").slice(0, 38) + "…" : a.titleZh || "";
+            var enT = (a.titleEn || "").length > 36 ? (a.titleEn || "").slice(0, 34) + "…" : a.titleEn || "—";
+            tr.innerHTML =
+              '<td class="whitespace-nowrap px-4 py-3 font-mono text-xs text-slate-400">' +
+              escapeHtml(a.date || "") +
+              "</td>" +
+              '<td class="max-w-[200px] px-4 py-3 text-slate-100">' +
+              (a.isTop
+                ? '<span class="mr-1 rounded bg-amber-400/20 px-1.5 py-0.5 text-xs font-bold text-amber-200">TOP</span>'
+                : "") +
+              escapeHtml(zhT) +
+              "</td>" +
+              '<td class="max-w-[200px] px-4 py-3 text-slate-300">' +
+              escapeHtml(enT) +
+              "</td>" +
+              '<td class="whitespace-nowrap px-4 py-3 text-slate-200">' +
+              tableLinkCell(a.urlZh, "中") +
+              "</td>" +
+              '<td class="whitespace-nowrap px-4 py-3 text-slate-200">' +
+              tableLinkCell(a.urlEn, "EN") +
+              "</td>" +
+              '<td class="whitespace-nowrap px-4 py-3 text-right">' +
+              '<button type="button" class="text-cyan-300 hover:underline btn-edit" data-id="' +
+              escapeAttr(a.id) +
+              '">編輯</button> ' +
+              '<button type="button" class="text-rose-300 hover:underline btn-del" data-id="' +
+              escapeAttr(a.id) +
+              '">刪除</button>' +
+              "</td>";
+            tbody.appendChild(tr);
+          });
+          tbody.querySelectorAll(".btn-edit").forEach(function (b) {
+            b.addEventListener("click", function () {
+              loadEdit(b.getAttribute("data-id"));
+            });
+          });
+          tbody.querySelectorAll(".btn-del").forEach(function (b) {
+            b.addEventListener("click", function () {
+              var id = b.getAttribute("data-id");
+              if (!confirm("確定刪除此筆？")) return;
+              var d = getStore();
+              d.announcements = (d.announcements || []).filter(function (x) {
+                return x.id !== id;
+              });
+              setStore(d);
+              clearFormForNew();
+              renderTable();
+              setStatus("已刪除。", true);
+            });
+          });
+        }
+
+        function escapeHtml(s) {
+          var d = document.createElement("div");
+          d.textContent = s;
+          return d.innerHTML;
+        }
+        function escapeAttr(s) {
+          return String(s).replace(/"/g, "&quot;");
+        }
+
+        /** 表格內可點連結；無網址時顯示 — */
+        function tableLinkCell(url, shortLabel) {
+          var u = (url || "").trim();
+          if (!u) return '<span class="text-slate-500">—</span>';
+          return (
+            '<a href="' +
+            escapeAttr(u) +
+            '" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-0.5 text-cyan-300 hover:text-cyan-200 hover:underline" title="' +
+            escapeAttr(u) +
+            '"><span class="font-medium">' +
+            escapeHtml(shortLabel) +
+            "</span><span class=\"text-[10px] text-slate-500\" aria-hidden=\"true\">↗</span></a>"
+          );
+        }
+
+        function loadEdit(id) {
+          var a = (getStore().announcements || []).find(function (x) {
+            return x.id === id;
+          });
+          if (!a) return;
+          editingId.value = a.id;
+          titleZh.value = a.titleZh || "";
+          var savedEn = (a.titleEn || "").trim();
+          titleEnPreview.value = savedEn;
+          lastPreviewZh = (a.titleZh || "").trim();
+          lastPreviewEn = savedEn;
+          setPreviewStatus(
+            savedEn
+              ? "目前已儲存之英文預覽；若修改中文，將自動重新預覽。"
+              : "修改中文後將自動顯示英文預覽。"
+          );
+          urlZh.value = a.urlZh || "";
+          urlEn.value = a.urlEn || "";
+          pubDate.value = a.date || todayStr();
+          dateTodayNote.textContent = "編輯模式（可改日期）";
+          setStatus("已載入編輯：請修改後按「新增／儲存」覆寫。", true);
+          if ((a.titleZh || "").trim() && !savedEn) {
+            runPreviewTranslate(false);
+          }
+        }
+
+        function seedFromEmbedIfEmpty() {
+          var d = getStore();
+          if (d.announcements && d.announcements.length) return false;
+          var seed = window.__IMMBA_ANNOUNCEMENTS_EMBED__;
+          if (!seed || !seed.announcements || !seed.announcements.length) return false;
+          setStore(JSON.parse(JSON.stringify(seed)));
+          return true;
+        }
+
+        /** file:// 或 fetch 失敗時，用 embed 依 id 補齊空的 titleEn／連結（不覆寫已有內容） */
+        function mergeEmbedIntoStore() {
+          var seed = window.__IMMBA_ANNOUNCEMENTS_EMBED__;
+          if (!seed || !seed.announcements || !seed.announcements.length) return false;
+          var byId = {};
+          seed.announcements.forEach(function (e) {
+            if (e && e.id) byId[e.id] = e;
+          });
+          var d = getStore();
+          var list = d.announcements || [];
+          var changed = false;
+          list.forEach(function (a) {
+            var e = byId[a.id];
+            if (!e) return;
+            if (!(a.titleEn || "").trim() && (e.titleEn || "").trim()) {
+              a.titleEn = e.titleEn;
+              changed = true;
+            }
+            if (!(a.urlZh || "").trim() && (e.urlZh || "").trim()) {
+              a.urlZh = e.urlZh;
+              changed = true;
+            }
+            if (!(a.urlEn || "").trim() && (e.urlEn || "").trim()) {
+              a.urlEn = e.urlEn;
+              changed = true;
+            }
+            if (a.isTop === undefined && e.isTop !== undefined) {
+              a.isTop = !!e.isTop;
+              changed = true;
+            }
+          });
+          if (changed) setStore(d);
+          return changed;
+        }
+
+        function applyEmbedOverwrite() {
+          var seed = window.__IMMBA_ANNOUNCEMENTS_EMBED__;
+          if (!seed || !seed.announcements || !seed.announcements.length) return false;
+          setStore(JSON.parse(JSON.stringify(seed)));
+          return true;
+        }
+
+        function bootstrap() {
+          var d = getStore();
+          if (!d.announcements || !d.announcements.length) {
+            fetch(new URL("../data/announcements.json", window.location.href).href, {
+              credentials: "same-origin",
+            })
+              .then(function (r) {
+                if (!r.ok) throw new Error("x");
+                return r.json();
+              })
+              .then(function (json) {
+                if (json && json.announcements && json.announcements.length) {
+                  setStore({
+                    announcements: json.announcements.map(migrateItem).filter(Boolean),
+                  });
+                }
+              })
+              .catch(function () {})
+              .finally(function () {
+                if (!getStore().announcements || !getStore().announcements.length) {
+                  if (seedFromEmbedIfEmpty()) setStatus("已載入內建雙語範本（fetch 不可用或專案檔無法讀取）。", true);
+                } else mergeEmbedIntoStore();
+                clearFormForNew();
+                renderTable();
+              });
+          } else {
+            if (mergeEmbedIntoStore())
+              setStatus("已從內建 announcements-embed.js 依公告 id 補齊空白英文標題或連結。", true);
+            clearFormForNew();
+            renderTable();
+          }
+        }
+
+        function persistAnnouncement(zh, titleEn) {
+          var d = getStore();
+          d.announcements = d.announcements || [];
+          var id = editingId.value.trim();
+          var item = {
+            id: id || crypto.randomUUID(),
+            date: pubDate.value.trim(),
+            isTop: false,
+            titleZh: zh,
+            titleEn: (titleEn || "").trim(),
+            urlZh: (urlZh.value || "").trim(),
+            urlEn: (urlEn.value || "").trim(),
+          };
+          if (id) {
+            var ix = d.announcements.findIndex(function (x) {
+              return x.id === id;
+            });
+            if (ix >= 0) {
+              item.isTop = !!d.announcements[ix].isTop;
+              d.announcements[ix] = item;
+            } else d.announcements.push(item);
+          } else {
+            d.announcements.push(item);
+          }
+          setStore(d);
+          clearFormForNew();
+          renderTable();
+          setStatus(
+            "已儲存至 localStorage（含英文標題）。請匯出 JSON 覆蓋專案 data/announcements.json。",
+            true
+          );
+        }
+
+        titleZh.addEventListener("input", scheduleTitlePreview);
+
+        btnPreviewTranslate.addEventListener("click", function () {
+          clearTimeout(previewDebounceTimer);
+          previewDebounceTimer = null;
+          runPreviewTranslate(true);
+        });
+
+        btnSave.addEventListener("click", function () {
+          if (!validateUrls()) {
+            setStatus("請修正連結格式。", false);
+            return;
+          }
+          if (!validateDate()) {
+            alert("日期須為 YYYY/MM/DD");
+            return;
+          }
+          var zh = titleZh.value.trim();
+          if (!zh) {
+            alert("請填中文標題");
+            return;
+          }
+          var useCached =
+            zh === lastPreviewZh && (lastPreviewEn || "").trim() !== "";
+          btnSave.disabled = true;
+          if (useCached) {
+            try {
+              persistAnnouncement(zh, lastPreviewEn);
+            } finally {
+              btnSave.disabled = false;
+            }
+            return;
+          }
+          setStatus("中文與預覽不一致或尚無預覽，正在翻譯英文標題…", null);
+          translateZhToEn(zh)
+            .then(function (en) {
+              var titleEn = (en || "").trim();
+              titleEnPreview.value = titleEn;
+              lastPreviewZh = zh;
+              lastPreviewEn = titleEn;
+              setPreviewStatus("已同步預覽並寫入。");
+              persistAnnouncement(zh, titleEn);
+            })
+            .catch(function (e) {
+              alert(
+                "英文翻譯失敗：" +
+                  (e && e.message ? e.message : e) +
+                  "\n請檢查網路後再試，未寫入資料。"
+              );
+              setStatus("翻譯失敗，未儲存。", false);
+            })
+            .finally(function () {
+              btnSave.disabled = false;
+            });
+        });
+
+        btnReimport.addEventListener("click", function () {
+          if (!confirm("將從專案 data/announcements.json 重新載入並覆蓋目前瀏覽器資料，確定？")) return;
+          fetch(new URL("../data/announcements.json", window.location.href).href, {
+            credentials: "same-origin",
+          })
+            .then(function (r) {
+              if (!r.ok) throw new Error("x");
+              return r.json();
+            })
+            .then(function (json) {
+              if (!json || !json.announcements) throw new Error("shape");
+              setStore({
+                announcements: json.announcements.map(migrateItem).filter(Boolean),
+              });
+              clearFormForNew();
+              renderTable();
+              setStatus("已從專案重新匯入。", true);
+            })
+            .catch(function () {
+              if (applyEmbedOverwrite()) {
+                clearFormForNew();
+                renderTable();
+                setStatus(
+                  "無法讀取 data/announcements.json（常見於以檔案開啟 file://）。已改為載入內建 announcements-embed.js 雙語清單。若用本機伺服器開啟後台可改讀專案檔。",
+                  false
+                );
+              } else if (seedFromEmbedIfEmpty()) {
+                clearFormForNew();
+                renderTable();
+                setStatus("無法讀取專案檔，已改載入內建範本。", false);
+              } else setStatus("無法讀取專案檔，且內建範本不可用。", false);
+            });
+        });
+
+        btnExport.addEventListener("click", function () {
+          var data = getStore();
+          var blob = new Blob([JSON.stringify(data, null, 2) + "\n"], {
+            type: "application/json;charset=utf-8",
+          });
+          var a = document.createElement("a");
+          a.href = URL.createObjectURL(blob);
+          a.download = "announcements.json";
+          a.click();
+          URL.revokeObjectURL(a.href);
+          setStatus("已下載 announcements.json。", true);
+        });
+
+        btnClear.addEventListener("click", function () {
+          if (!confirm("確定清空全部公告？此動作無法還原。")) return;
+          setStore({ announcements: [] });
+          clearFormForNew();
+          renderTable();
+          setStatus("已清空。", true);
+        });
+
+        bootstrap();
+      })();
+    </script>
+  </body>
+</html>

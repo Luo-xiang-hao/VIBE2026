@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>imMBA｜官方網站後台管理中心</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+TC:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./shell.css" />
+    <link rel="stylesheet" href="./home-logo.css" />
+    <link rel="stylesheet" href="./dashboard.css" />
+  </head>
+  <body class="imo-shell">
+    <header class="imo-topbar">
+      <div class="imo-topbar__inner">
+        <div class="imo-topbar__brand">
+          <div class="imo-home-logo-scale imo-home-logo-scale--topbar" aria-hidden="true">
+            <div class="logo-mark">
+              <div class="logo-cap">
+                <span class="logo-cap-top"></span>
+                <span class="logo-cap-board"></span>
+                <span class="logo-cap-tassel"></span>
+              </div>
+              <div class="logo-globe">
+                <span class="logo-globe-glow"></span>
+                <span class="logo-globe-ring logo-globe-ring--lat1"></span>
+                <span class="logo-globe-ring logo-globe-ring--lat2"></span>
+                <span class="logo-globe-ring logo-globe-ring--merid"></span>
+                <div class="logo-mid-band">
+                  <span class="logo-rule"></span>
+                  <span class="logo-title-inner">imMBA</span>
+                  <span class="logo-rule"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="imo-topbar__brand-text">
+            <h1 class="imo-topbar__title">imMBA 總後台管理</h1>
+            <p class="imo-topbar__lead">
+              整合公告、活動集錦等模組；各模組資料存於瀏覽器
+              <code>localStorage</code>（鍵名依功能而異）。活動集錦請以
+              <code>immba-pure.html#events-admin</code> 為主（純 HTML 後台）；亦可用 React 版
+              <code>react.html#/admin/events</code>。
+            </p>
+          </div>
+        </div>
+        <div class="imo-topbar__links">
+          <a href="../index.html">開啟前台 index.html</a>
+          <a href="../immba-pure.html">純 HTML 活動頁</a>
+          <a href="../announcements.html">中文公告索引</a>
+          <a href="./dashboard.html">HTML 後台總覽</a>
+          <a href="../react.html#/">返回前台首頁（React）</a>
+        </div>
+      </div>
+    </header>
+
+    <div class="imo-tabs-wrap">
+      <div class="imo-tabs" role="tablist" aria-label="後台模組">
+        <span class="imo-tab imo-tab--active" role="tab" aria-current="page">總覽</span>
+        <a class="imo-tab" role="tab" href="./index.html">公告管理</a>
+        <a class="imo-tab" role="tab" href="../immba-pure.html#events-admin">活動集錦管理</a>
+      </div>
+    </div>
+
+    <div class="imo-workspace">
+      <div class="imo-workspace__inner">
+        <div class="imo-section-card">
+          <div class="imo-section-card__inner admin-dash-section-head">
+            <div class="admin-dash-section-head__brand">
+              <div class="imo-home-logo-scale" aria-hidden="true">
+                <div class="logo-mark">
+                  <div class="logo-cap">
+                    <span class="logo-cap-top"></span>
+                    <span class="logo-cap-board"></span>
+                    <span class="logo-cap-tassel"></span>
+                  </div>
+                  <div class="logo-globe">
+                    <span class="logo-globe-glow"></span>
+                    <span class="logo-globe-ring logo-globe-ring--lat1"></span>
+                    <span class="logo-globe-ring logo-globe-ring--lat2"></span>
+                    <span class="logo-globe-ring logo-globe-ring--merid"></span>
+                    <div class="logo-mid-band">
+                      <span class="logo-rule"></span>
+                      <span class="logo-title-inner">imMBA</span>
+                      <span class="logo-rule"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <div class="admin-dash-section-head__name">imMBA</div>
+                <h2 class="imo-section-bar__title admin-dash-section-head__title">
+                  官方網站後台管理中心
+                </h2>
+              </div>
+            </div>
+            <p class="imo-section-bar__text">
+              請由下方卡片進入各模組。活動集錦以純 HTML 後台
+              <code>immba-pure.html#events-admin</code> 為主；React 後台為
+              <code>react.html#/admin/events</code>。
+            </p>
+          </div>
+        </div>
+        <div class="imo-workspace__body">
+          <main class="imo-main">
+      <div class="admin-dash-grid">
+        <a class="imo-paper admin-dash-card" href="./index.html">
+          <h2 class="admin-dash-card-title">公告管理</h2>
+          <p class="admin-dash-card-desc">
+            編輯中英公告列表、連結與發布日期（本頁同一資料夾之公告後台）。
+          </p>
+          <span class="admin-dash-card-cta">進入 →</span>
+        </a>
+
+        <a
+          class="imo-paper admin-dash-card"
+          href="../immba-pure.html#events-admin"
+        >
+          <h2 class="admin-dash-card-title">活動集錦管理</h2>
+          <p class="admin-dash-card-desc">
+            純 HTML 活動後台（標題、日期、內文、圖片）；與 React 版共用資料鍵名
+            <code class="admin-dash-card-code">immba-event-items</code>。React：
+            <code class="admin-dash-card-code">react.html#/admin/events</code>。
+          </p>
+          <span class="admin-dash-card-cta">進入 →</span>
+        </a>
+
+        <div class="imo-paper admin-dash-card admin-dash-card--placeholder">
+          <h2 class="admin-dash-card-title">其他前台子項目管理</h2>
+          <p class="admin-dash-card-desc">
+            預留：未來可加入師資、課程、下載區等更多管理模組。
+          </p>
+          <span class="admin-dash-card-cta admin-dash-card-cta--muted">尚未開放</span>
+        </div>
+      </div>
+
+      <p class="admin-dash-footer">
+        <a href="../index.html">← 返回前台首頁</a>
+      </p>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

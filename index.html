@@ -23,7 +23,7 @@
     <header class="site-header site-header-v2">
       <div class="site-header-v2-bg">
         <div class="container site-header-v2-top">
-          <a class="brand-v2" href="./index.html" aria-label="imMBA 首頁">
+          <a class="brand-v2" href="./admin/dashboard.html" aria-label="進入 imMBA 官方網站後台管理中心">
             <div class="logo-mark" aria-hidden="true">
               <div class="logo-cap">
                 <span class="logo-cap-top"></span>
@@ -76,7 +76,9 @@
                 <li class="nav-v2-item"><a href="./graduation.html">畢業與離校</a></li>
                 <li class="nav-v2-item"><a href="./dualDegree.html">跨國雙碩士</a></li>
                 <li class="nav-v2-item"><a href="./exchange.html">海外交換</a></li>
-                <li class="nav-v2-item"><a href="./gallery.html">活動集錦</a></li>
+                <li class="nav-v2-item">
+                  <a href="./gallery.html">活動集錦</a>
+                </li>
               </ul>
             </nav>
           </div>
@@ -131,28 +133,7 @@
                 <h2 class="card-title">最新公告</h2>
                 <a class="card-link" href="./announcements.html">更多</a>
               </div>
-              <ul class="list">
-                <li>
-                  <a href="https://www.management.fju.edu.tw/subweb/immba/" target="_blank" rel="noreferrer">
-                    <span class="tag top">TOP</span>
-                    <span>
-                      <div class="item-title">(國際經管-全英MBA) 115碩士招生口試通知</div>
-                      <div class="item-sub">2026/03/09</div>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.management.fju.edu.tw/subweb/immba/" target="_blank" rel="noreferrer">
-                    <span class="tag top">TOP</span>
-                    <span>
-                      <div class="item-title">
-                        (外國學生申請入學) Fall 2026, apply NOW!! (Feb 9 - March 5) - the first round
-                      </div>
-                      <div class="item-sub">2026/02/09</div>
-                    </span>
-                  </a>
-                </li>
-              </ul>
+              <ul class="list" id="homeAnnouncements"></ul>
             </div>
             <div class="card card-alt">
               <div class="card-head">
@@ -232,6 +213,7 @@
               <li><a href="./downloads.html">表格下載</a></li>
               <li><a href="./contact.html">聯絡我們</a></li>
               <li><a href="./announcements.html">公告</a></li>
+              <li><a href="./gallery.html">活動集錦</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -250,8 +232,21 @@
         </div>
       </div>
     </footer>
+    <script src="./assets/announcements-embed.js"></script>
+    <script src="./assets/announcements-feed.js"></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+      if (window.immbaAnnouncementsFeed) {
+        immbaAnnouncementsFeed.load("#homeAnnouncements", { limit: 5 });
+      }
+      if (location.protocol === "file:") {
+        var bar = document.createElement("p");
+        bar.setAttribute("role", "status");
+        bar.className = "file-protocol-hint";
+        bar.textContent =
+          "您正以本機檔案開啟網頁；公告會使用內嵌資料。若要像一般網站一樣用網址開，請雙擊專案裡的 open-site.bat，或在終端執行 npm run open / npm start。";
+        document.body.appendChild(bar);
+      }
     </script>
   </body>
 </html>

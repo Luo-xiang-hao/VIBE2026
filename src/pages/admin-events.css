@@ -1,0 +1,352 @@
+/**
+ * 活動後台：對齊 admin/index.html?embed=1（淺灰底、白卡、rounded-xl 輸入、底部左／右列）
+ */
+.admin-events-main {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+
+.admin-events-columns {
+  display: grid;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (min-width: 960px) {
+  .admin-events-columns {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  }
+}
+
+/* 對齊 .admin-embed .admin-panel */
+.admin-events-panel {
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+.admin-events-panel--form {
+  padding: 1.5rem;
+}
+
+.admin-events-panel--list {
+  padding: 0;
+  overflow: hidden;
+}
+
+.admin-events-form-heading {
+  margin: 0 0 1.25rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* 對齊 grid gap-5 md:grid-cols-2 md:gap-6 */
+.admin-events-form-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .admin-events-form-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.admin-events-field {
+  margin-bottom: 0;
+}
+
+.admin-events-field--tight label {
+  margin-bottom: 0.375rem;
+}
+
+.admin-events-field--content {
+  margin-top: 1.5rem;
+}
+
+.admin-events-field label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.admin-events-hint {
+  margin: 0.375rem 0 0;
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+/* 對齊 .admin-input（embed 淺色） */
+.admin-events-input,
+.admin-events-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid #cbd5e1;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-family: inherit;
+  color: #0f172a;
+  background: #fff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.admin-events-textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.admin-events-input::placeholder,
+.admin-events-textarea::placeholder {
+  color: #94a3b8;
+}
+
+.admin-events-input:focus,
+.admin-events-textarea:focus {
+  outline: none;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+}
+
+.admin-events-date-input {
+  max-width: 200px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 對齊 mt-6 flex border-t pt-6 sm:items-end sm:justify-between */
+.admin-events-form-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .admin-events-form-footer {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+}
+
+.admin-events-form-footer__left {
+  flex-shrink: 0;
+}
+
+.admin-events-form-footer__right {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .admin-events-form-footer__right {
+    align-items: flex-end;
+  }
+}
+
+.admin-events-footer-hint {
+  margin: 0;
+  max-width: 20rem;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #64748b;
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .admin-events-footer-hint {
+    text-align: right;
+  }
+}
+
+/* 對齊 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 */
+.admin-events-btn-primary {
+  cursor: pointer;
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 2rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: linear-gradient(90deg, #06b6d4 0%, #2563eb 100%);
+  box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+  transition: filter 0.15s, transform 0.08s, box-shadow 0.15s;
+}
+
+.admin-events-btn-primary:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.15), 0 4px 6px -4px rgba(37, 99, 235, 0.1);
+}
+
+.admin-events-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.admin-events-btn-ghost {
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #475569;
+  background: #fff;
+}
+
+.admin-events-btn-ghost:hover {
+  background: #f8fafc;
+}
+
+/* 次要操作：對齊「匯出」類淺框線按鈕 */
+.admin-events-btn-restore {
+  cursor: pointer;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  padding: 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  color: #334155;
+  background: #f8fafc;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.admin-events-btn-restore:hover {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.admin-events-error {
+  margin: 0.75rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.admin-events-success {
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #15803d;
+}
+
+/* 對齊已儲存公告區塊標題列 */
+.admin-events-panel__head {
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.admin-events-panel__head h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.admin-events-panel__head p {
+  margin: 0.35rem 0 0;
+  font-size: 0.75rem;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+.admin-events-empty {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+.admin-events-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: min(70vh, 560px);
+  overflow-y: auto;
+  background: #fff;
+}
+
+.admin-events-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.admin-events-row:last-child {
+  border-bottom: none;
+}
+
+.admin-events-row:hover {
+  background: #f8fafc;
+}
+
+.admin-events-row-main {
+  min-width: 0;
+  flex: 1;
+}
+
+.admin-events-row-title {
+  margin: 0 0 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0f172a;
+  line-height: 1.35;
+}
+
+.admin-events-row-meta {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #64748b;
+  font-variant-numeric: tabular-nums;
+}
+
+.admin-events-row-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.admin-events-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.admin-events-link--edit {
+  color: #0284c7;
+}
+
+.admin-events-link--edit:hover {
+  text-decoration: underline;
+}
+
+.admin-events-link--del {
+  color: #dc2626;
+}
+
+.admin-events-link--del:hover {
+  text-decoration: underline;
+}

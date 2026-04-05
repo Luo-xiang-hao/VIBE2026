@@ -23,7 +23,7 @@
     <header class="site-header site-header-v2">
       <div class="site-header-v2-bg">
         <div class="container site-header-v2-top">
-          <a class="brand-v2" href="./en.html" aria-label="imMBA home">
+          <a class="brand-v2" href="./admin/dashboard.html" aria-label="進入 imMBA 官方網站後台管理中心">
             <div class="logo-mark" aria-hidden="true">
               <div class="logo-cap">
                 <span class="logo-cap-top"></span>
@@ -45,7 +45,7 @@
             <span class="brand-v2-subtitle brand-v2-subtitle--aside">International MBA · Fu Jen Catholic University</span>
           </a>
           <nav class="header-util-bar" aria-label="Top utility bar">
-            <a href="./announcements.html">News</a>
+            <a href="./announcements-en.html">News</a>
             <span class="header-util-sep" aria-hidden="true">|</span>
             <a href="https://www.management.fju.edu.tw/" target="_blank" rel="noreferrer">College of Management</a>
             <span class="header-util-sep" aria-hidden="true">|</span>
@@ -76,7 +76,7 @@
                 <li class="nav-v2-item"><a href="./graduation.html">Graduation</a></li>
                 <li class="nav-v2-item"><a href="./dualDegree.html">Dual Degree</a></li>
                 <li class="nav-v2-item"><a href="./exchange.html">Exchange</a></li>
-                <li class="nav-v2-item"><a href="./gallery.html">Gallery</a></li>
+                <li class="nav-v2-item"><a href="./gallery-en.html">Gallery</a></li>
               </ul>
             </nav>
           </div>
@@ -129,35 +129,14 @@
             <div class="card">
               <div class="card-head">
                 <h2 class="card-title">Latest announcements</h2>
-                <a class="card-link" href="./announcements.html">More</a>
+                <a class="card-link" href="./announcements-en.html">More</a>
               </div>
-              <ul class="list">
-                <li>
-                  <a href="https://www.management.fju.edu.tw/subweb/immba/" target="_blank" rel="noreferrer">
-                    <span class="tag top">TOP</span>
-                    <span>
-                      <div class="item-title">(imMBA) 2026 master’s admission interview notice</div>
-                      <div class="item-sub">2026/03/09</div>
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a href="https://www.management.fju.edu.tw/subweb/immba/" target="_blank" rel="noreferrer">
-                    <span class="tag top">TOP</span>
-                    <span>
-                      <div class="item-title">
-                        (International applicants) Fall 2026 — apply now (Feb 9 – Mar 5), first round
-                      </div>
-                      <div class="item-sub">2026/02/09</div>
-                    </span>
-                  </a>
-                </li>
-              </ul>
+              <ul class="list" id="homeAnnouncementsEn"></ul>
             </div>
             <div class="card card-alt">
               <div class="card-head">
                 <h2 class="card-title">Photo gallery</h2>
-                <a class="card-link" href="./gallery.html">More</a>
+                <a class="card-link" href="./gallery-en.html">More</a>
               </div>
               <div class="gallery-preview" id="galleryPreview" aria-hidden="true"></div>
               <p class="muted">Placeholder area — replace with real photos when ready.</p>
@@ -178,7 +157,7 @@
                 <div class="sidenav-sub" id="sideSub">International MBA</div>
               </div>
               <ul class="sidenav-list">
-                <li><a href="./announcements.html">Announcements</a></li>
+                <li><a href="./announcements-en.html">Announcements</a></li>
                 <li><a href="./admissions.html">Admissions</a></li>
                 <li><a href="./academics.html">Program</a></li>
                 <li><a href="./downloads.html">Downloads</a></li>
@@ -227,7 +206,7 @@
             <ul class="footer-list">
               <li><a href="./downloads.html">Downloads</a></li>
               <li><a href="./contact.html">Contact</a></li>
-              <li><a href="./announcements.html">Announcements</a></li>
+              <li><a href="./announcements-en.html">Announcements</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -246,8 +225,13 @@
         </div>
       </div>
     </footer>
+    <script src="./assets/announcements-embed.js"></script>
+    <script src="./assets/announcements-feed.js"></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
+      if (window.immbaAnnouncementsFeed) {
+        immbaAnnouncementsFeed.load("#homeAnnouncementsEn", { limit: 5, locale: "en" });
+      }
     </script>
   </body>
 </html>

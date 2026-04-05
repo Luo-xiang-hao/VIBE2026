@@ -3,7 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>最新公告｜imMBA</title>
+    <title>活動集錦｜imMBA</title>
+    <meta
+      name="description"
+      content="輔仁大學國際經營管理碩士班 imMBA 活動集錦，摘錄自管理學院官網。"
+    />
+    <link rel="alternate" hreflang="zh-Hant" href="./gallery.html" />
+    <link rel="alternate" hreflang="en" href="./gallery-en.html" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -12,9 +18,9 @@
     />
     <link rel="stylesheet" href="./assets/styles.css" />
     <link rel="stylesheet" href="./style.css" />
-    <link rel="stylesheet" href="./assets/announcements-page.css" />
+    <link rel="stylesheet" href="./assets/events-page.css" />
   </head>
-  <body>
+  <body class="page-events">
     <a class="skip-link" href="#main">跳到主要內容</a>
 
     <header class="site-header site-header-v2">
@@ -42,18 +48,18 @@
             <span class="brand-v2-subtitle brand-v2-subtitle--aside">輔仁大學國際經營管理碩士班(imMBA)</span>
           </a>
           <nav class="header-util-bar" aria-label="頂部工具列">
-            <a href="./announcements.html" aria-current="page">公告</a>
+            <a href="./announcements.html">公告</a>
             <span class="header-util-sep" aria-hidden="true">|</span>
             <a href="https://www.management.fju.edu.tw/" target="_blank" rel="noreferrer">輔大管理學院</a>
             <span class="header-util-sep" aria-hidden="true">|</span>
-            <a href="./announcements-en.html" lang="en">EN</a>
+            <a href="./gallery-en.html" lang="en">EN</a>
           </nav>
         </div>
 
         <div class="site-header-v2-nav-wrap">
           <div class="container site-header-v2-nav-inner">
-            <nav class="nav-v2" aria-label="主選單">
-              <ul class="nav-v2-main">
+            <nav class="nav-v2" id="navMenu" aria-label="主選單">
+              <ul class="nav-v2-main" id="navList">
                 <li class="nav-v2-item"><a href="./about.html">簡介</a></li>
                 <li class="nav-v2-item nav-v2-item--has-sub">
                   <a href="./admissions.html">招生資訊 <span class="nav-v2-chev" aria-hidden="true">▾</span></a>
@@ -73,7 +79,9 @@
                 <li class="nav-v2-item"><a href="./graduation.html">畢業與離校</a></li>
                 <li class="nav-v2-item"><a href="./dualDegree.html">跨國雙碩士</a></li>
                 <li class="nav-v2-item"><a href="./exchange.html">海外交換</a></li>
-                <li class="nav-v2-item"><a href="./gallery.html">活動集錦</a></li>
+                <li class="nav-v2-item">
+                  <a href="./gallery.html" aria-current="page">活動集錦</a>
+                </li>
               </ul>
             </nav>
           </div>
@@ -84,23 +92,25 @@
     <main id="main" class="site-main">
       <section class="content">
         <div class="container">
-          <div class="breadcrumbs" aria-label="Breadcrumb">
-            <a href="./index.html">首頁</a>
-            <span aria-hidden="true"> / </span>
-            <span aria-current="page">公告</span>
-          </div>
-          <article class="article">
-            <h1>最新公告</h1>
-            <p class="muted">點選項目可開啟本站摘要頁，並可前往輔大 imMBA 官網查看全文。</p>
-            <div class="hero-card" style="max-width: 920px">
-              <div class="card">
-                <ul class="list" id="announcementsPageList"></ul>
-              </div>
-            </div>
-            <p class="announce-source-foot">
-              資料來源：輔仁大學國際經營管理碩士班(imMBA) 官網公告
+          <div class="page page--events-full">
+            <h1 class="events-page-title">活動集錦</h1>
+            <div
+              id="eventsFeed"
+              class="events-feed-root"
+              role="feed"
+              aria-label="活動文章列表"
+              aria-busy="true"
+            ></div>
+            <p class="events-page-source">
+              資料來源：
+              <a
+                href="https://www.management.fju.edu.tw/subweb/immba/subedit.php?EID=241"
+                target="_blank"
+                rel="noreferrer noopener"
+                >輔仁大學國際經營管理碩士班(imMBA) 官網｜活動集錦</a
+              >
             </p>
-          </article>
+          </div>
         </div>
       </section>
     </main>
@@ -111,22 +121,36 @@
           <div class="footer-title">imMBA</div>
           <div class="footer-sub">輔仁大學管理學院 · 國際經營管理碩士班</div>
         </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <div class="footer-h">相關連結</div>
+            <ul class="footer-list">
+              <li><a href="./downloads.html">表格下載</a></li>
+              <li><a href="./contact.html">聯絡我們</a></li>
+              <li><a href="./announcements.html">公告</a></li>
+              <li><a href="./gallery.html">活動集錦</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <div class="footer-h">備註</div>
+            <p class="footer-note">本網站為新版重建範本，內容以舊站架構為參考，細節可再補齊與更新。</p>
+          </div>
+        </div>
       </div>
       <div class="container footer-bottom">
         <div class="copy">© <span id="year"></span> imMBA · FJCU</div>
         <div class="footer-actions">
-          <a class="to-top" href="./index.html">回到首頁</a>
+          <a class="to-top" href="./index.html">回到頂部</a>
+          <a class="to-top" href="./gallery-en.html" lang="en">EN</a>
         </div>
       </div>
     </footer>
 
-    <script src="./assets/announcements-embed.js"></script>
-    <script src="./assets/announcements-feed.js"></script>
+    <script src="./assets/events-embed.js"></script>
+    <script src="./assets/events-page.js"></script>
     <script>
       document.getElementById("year").textContent = new Date().getFullYear();
-      if (window.immbaAnnouncementsFeed) {
-        immbaAnnouncementsFeed.load("#announcementsPageList", { locale: "zh" });
-      }
+      if (window.immbaEventsPage) immbaEventsPage.load("#eventsFeed", { locale: "zh" });
     </script>
   </body>
 </html>

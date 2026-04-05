@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>imMBA｜純 HTML 活動集錦</title>
+    <meta name="description" content="活動集錦預覽與後台；由專案資料自動產生，可離線或以 file:// 開啟。" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./assets/styles.css" />
+    <link rel="stylesheet" href="./assets/pure-home.css" />
+    <link rel="stylesheet" href="./admin/shell.css" />
+    <link rel="stylesheet" href="./admin/home-logo.css" />
+    <link rel="stylesheet" href="./assets/pure-events-admin.css" />
+  </head>
+  <body class="pure-page">
+    <!--INJECT_META_COMMENT-->
+
+    <section id="events-admin" class="pure-events-admin-section" aria-label="活動集錦後台">
+      <div class="pure-admin-shell">
+        <div class="admin-html-chrome">
+          <header class="imo-topbar">
+            <div class="imo-topbar__inner">
+              <div class="imo-topbar__brand">
+                <div class="imo-home-logo-scale imo-home-logo-scale--topbar" aria-hidden="true">
+                  <div class="logo-mark">
+                    <div class="logo-cap">
+                      <span class="logo-cap-top"></span>
+                      <span class="logo-cap-board"></span>
+                      <span class="logo-cap-tassel"></span>
+                    </div>
+                    <div class="logo-globe">
+                      <span class="logo-globe-glow"></span>
+                      <span class="logo-globe-ring logo-globe-ring--lat1"></span>
+                      <span class="logo-globe-ring logo-globe-ring--lat2"></span>
+                      <span class="logo-globe-ring logo-globe-ring--merid"></span>
+                      <div class="logo-mid-band">
+                        <span class="logo-rule"></span>
+                        <span class="logo-title-inner">imMBA</span>
+                        <span class="logo-rule"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="imo-topbar__brand-text">
+                  <h1 class="imo-topbar__title">imMBA 總後台管理</h1>
+                  <p class="imo-topbar__lead">
+                    整合公告、活動集錦等模組；各模組資料存於瀏覽器
+                    <code>localStorage</code>（鍵名依功能而異）。活動集錦請以
+                    <code>immba-pure.html#events-admin</code> 為主（純 HTML 後台）；亦可用 React 版
+                    <code>react.html#/admin/events</code>。
+                  </p>
+                </div>
+              </div>
+              <div class="imo-topbar__links">
+                <a href="./index.html">開啟前台 index.html</a>
+                <a href="./immba-pure.html">純 HTML 活動頁</a>
+                <a href="./announcements.html">中文公告索引</a>
+                <a href="./admin/dashboard.html">HTML 後台總覽</a>
+                <a href="./react.html#/">返回前台首頁（React）</a>
+              </div>
+            </div>
+          </header>
+          <div class="imo-tabs-wrap">
+            <div class="imo-tabs" role="tablist" aria-label="後台模組">
+              <a class="imo-tab" role="tab" href="./admin/dashboard.html">總覽</a>
+              <a class="imo-tab" role="tab" href="./admin/index.html">公告管理</a>
+              <span class="imo-tab imo-tab--active" role="tab" aria-current="page">活動集錦管理</span>
+            </div>
+          </div>
+        </div>
+        <div class="pure-admin-workspace">
+          <div class="pure-admin-workspace__inner pure-admin-workspace__inner--wide">
+            <div class="pure-admin-section-card">
+              <h2 class="pure-admin-section__title">imMBA 活動集錦管理後台</h2>
+              <p class="pure-admin-section__text">
+                與下方「活動集錦」預覽、React 後台共用 <code>localStorage</code> 鍵名
+                <code>immba-event-items</code>。預設內容與
+                <a
+                  href="https://www.management.fju.edu.tw/subweb/immba/subedit.php?EID=241"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  >imMBA 官網｜活動集錦</a
+                >
+                對齊（標題、英文日期、內文、Hashtag）；還原時自 <code>data/events.json</code> 載入。
+              </p>
+              <nav class="pure-admin-section__nav" aria-label="捷徑">
+                <a href="./immba-pure.html#events">開啟前台 immba-pure（活動集錦）</a>
+                <a href="./react.html#/admin/events">React 活動後台</a>
+                <a href="./admin/index.html">HTML 公告後台</a>
+                <a
+                  href="https://www.management.fju.edu.tw/subweb/immba/subedit.php?EID=241"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  >官網｜活動集錦</a
+                >
+              </nav>
+            </div>
+            <div class="pure-admin-workspace__body">
+              <div class="pure-admin-stack">
+                <section class="pure-admin-panel pure-admin-panel--form">
+                  <form id="pea-form" novalidate>
+                    <input type="hidden" id="pea-editing-id" value="" />
+                    <p class="pea-workflow-hint">
+                      建議流程：填寫中文標題與內文 → 上傳圖片 → 按「自動翻譯英文」或離開中文欄位嘗試線上翻譯 → 檢查英文後儲存。新增時中文日期預設為今天；英文日期可由中文日期自動帶入，亦可手動改成如
+                      March 25, 2026。圖片建議小於約 1MB（過大可能超出瀏覽器儲存上限）。
+                    </p>
+
+                    <div class="pea-form-block">
+                      <h3 class="pea-form-block__title">日期與圖片（中英共用）</h3>
+                      <div class="pea-two-col">
+                        <div class="pure-admin-field">
+                          <label for="pea-date-zh">中文日期（顯示於前台中文）</label>
+                          <input
+                            id="pea-date-zh"
+                            class="pure-admin-input pure-admin-input--date"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="2026/03/25"
+                          />
+                        </div>
+                        <div class="pure-admin-field">
+                          <label for="pea-date-en">English date (shown on EN)</label>
+                          <input
+                            id="pea-date-en"
+                            class="pure-admin-input"
+                            type="text"
+                            autocomplete="off"
+                            placeholder="March 25, 2026"
+                          />
+                        </div>
+                      </div>
+                      <div class="pure-admin-field pure-admin-field--block pea-image-block">
+                        <label for="pea-image">上傳圖片（中英共用）</label>
+                        <div class="pea-image-row">
+                          <input id="pea-image" type="file" accept="image/*" />
+                          <div class="pea-image-preview-col">
+                            <div class="pea-image-slot">
+                              <div id="pea-image-placeholder" class="pea-image-placeholder">
+                                <svg
+                                  class="pea-image-placeholder__icon"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  width="48"
+                                  height="48"
+                                  viewBox="0 0 24 24"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  stroke-width="1.5"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  aria-hidden="true"
+                                >
+                                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                                  <circle cx="8.5" cy="10.5" r="1.5" fill="currentColor" stroke="none" />
+                                  <path d="M21 17l-5-5-4 4-2-2-4 4" />
+                                </svg>
+                                <span class="pea-image-placeholder__title">示意圖</span>
+                                <span class="pea-image-placeholder__hint">選擇圖片檔後，預覽將顯示於此（建議小於約 1MB）</span>
+                              </div>
+                              <img id="pea-image-preview" class="pea-image-preview" alt="" width="280" height="160" hidden />
+                            </div>
+                          </div>
+                        </div>
+                        <button type="button" class="pure-admin-btn-ghost pea-btn-clear-img" id="pea-clear-image">
+                          清除圖片
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="pea-form-block">
+                      <h3 class="pea-form-block__title">中文「活動集錦」</h3>
+                      <div class="pure-admin-field">
+                        <label for="pea-title">中文標題（必填）</label>
+                        <input
+                          id="pea-title"
+                          class="pure-admin-input"
+                          type="text"
+                          autocomplete="off"
+                          placeholder="【活動標題】"
+                        />
+                      </div>
+                      <div class="pure-admin-field pure-admin-field--block">
+                        <label for="pea-content">中文內文（必填）</label>
+                        <textarea
+                          id="pea-content"
+                          class="pure-admin-textarea"
+                          rows="8"
+                          placeholder="活動說明，可換行…"
+                        ></textarea>
+                      </div>
+                      <div class="pure-admin-field pure-admin-field--block">
+                        <label for="pea-hashtags">Hashtag（中英前台通用）</label>
+                        <input
+                          id="pea-hashtags"
+                          class="pure-admin-input"
+                          type="text"
+                          autocomplete="off"
+                          value="#輔大國際經管 #跨國雙碩士 #FJCU_imMBA #Dual_Master_Degree"
+                          placeholder="#標籤1 #標籤2（空格或逗號分隔）"
+                        />
+                        <p class="pure-admin-hint">與官網活動集錦底部標籤一致；可自訂多個，未加 # 會自動補上。</p>
+                      </div>
+                    </div>
+
+                    <div class="pea-form-block">
+                      <h3 class="pea-form-block__title">English “Event highlights”</h3>
+                      <div class="pea-translate-actions">
+                        <button type="button" class="pure-admin-btn-restore" id="pea-translate">自動翻譯英文（線上）</button>
+                        <button type="button" class="pure-admin-btn-ghost" id="pea-copy-zh-en">將中文複製到英文（手動潤稿）</button>
+                      </div>
+                      <p class="pure-admin-hint pea-translate-hint" id="pea-translate-status" hidden></p>
+                      <div class="pure-admin-field">
+                        <label for="pea-title-en">English title</label>
+                        <input
+                          id="pea-title-en"
+                          class="pure-admin-input"
+                          type="text"
+                          autocomplete="off"
+                          placeholder="Title in English"
+                        />
+                      </div>
+                      <div class="pure-admin-field pure-admin-field--block">
+                        <label for="pea-content-en">English content</label>
+                        <textarea
+                          id="pea-content-en"
+                          class="pure-admin-textarea"
+                          rows="8"
+                          placeholder="Content in English"
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="pure-admin-form-footer">
+                      <div class="pure-admin-form-footer__left">
+                        <p class="pure-admin-hint pure-admin-hint--tight" id="pea-date-hint"></p>
+                        <button type="button" class="pure-admin-btn-restore" id="pea-restore">
+                          一鍵還原成原始活動集錦內容
+                        </button>
+                      </div>
+                      <div class="pure-admin-form-footer__right">
+                        <button type="button" class="pure-admin-btn-ghost" id="pea-cancel" hidden>取消編輯</button>
+                        <button type="submit" class="pure-admin-btn-primary" id="pea-submit">新增／儲存</button>
+                        <p class="pure-admin-footer-hint">儲存後本頁「活動集錦」與 React 前台會一併更新（同源 localStorage）。</p>
+                      </div>
+                    </div>
+                    <p class="pure-admin-msg pure-admin-msg--error" id="pea-error" role="alert" hidden></p>
+                    <p class="pure-admin-msg pure-admin-msg--success" id="pea-success" role="status" hidden></p>
+                  </form>
+                </section>
+                <section
+                  id="pea-activity-list"
+                  class="pure-admin-panel pure-admin-panel--list pure-admin-panel--below"
+                  aria-labelledby="pea-list-title"
+                >
+                  <div class="pure-admin-panel__head pea-list-head">
+                    <div class="pea-list-head__titles">
+                      <h2 id="pea-list-title">活動列表（由上至下為前台顯示順序）</h2>
+                      <span class="pea-list-badge">活動數據管理（中英同步）</span>
+                    </div>
+                    <p class="pea-list-head__lead">
+                      點「修改」帶回上方表單；「刪除」需確認。順序與前台「活動集錦」一致（新→舊）。欄位對應：標題、日期、內文、Hashtag 與
+                      <a
+                        href="https://www.management.fju.edu.tw/subweb/immba/subedit.php?EID=241"
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        >官網活動集錦</a
+                      >
+                      。
+                    </p>
+                  </div>
+                  <div class="pea-list-toolbar">
+                    <div class="pea-tags-block">
+                      <span class="pea-tags-block__label">標籤（中英前台通用）</span>
+                      <span class="pea-tags-block__tags"
+                        >#輔大國際經管 #跨國雙碩士 #FJCU_imMBA #Dual_Master_Degree</span
+                      >
+                    </div>
+                    <div class="pea-list-toolbar__actions">
+                      <button type="button" class="pea-btn-add-activity" id="pea-add-new">新增活動</button>
+                      <label class="pea-check-label">
+                        <input type="checkbox" id="pea-opt-auto-translate" checked />
+                        自動翻譯英文
+                      </label>
+                      <label class="pea-check-label" title="儲存或還原成功後自動捲動到此活動列表">
+                        <input type="checkbox" id="pea-opt-scroll-list" checked />
+                        善後預設資料
+                      </label>
+                    </div>
+                    <p class="pea-list-toolbar__note">
+                      註：可只填中文後儲存；英文可用手動填寫、「自動翻譯英文」按鈕，或勾選上方「自動翻譯英文」於離開中文欄位時嘗試線上翻譯（服務可能限流）。
+                    </p>
+                  </div>
+                  <div class="pea-activity-table-wrap" role="region" aria-label="活動列表表格" tabindex="0">
+                    <table class="pea-activity-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">日期（中／英）</th>
+                          <th scope="col">中文標題</th>
+                          <th scope="col">英文標題</th>
+                          <th scope="col">Hashtag</th>
+                          <th scope="col">圖片</th>
+                          <th scope="col">操作</th>
+                        </tr>
+                      </thead>
+                      <tbody id="pea-list-tbody"></tbody>
+                    </table>
+                  </div>
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <main class="pure-main">
+      <p id="pure-ls-notice" class="pure-ls-notice" hidden></p>
+
+      <section id="events" class="pure-section" aria-labelledby="pure-events-h">
+        <h2 id="pure-events-h">活動集錦</h2>
+        <div class="pure-events-list">
+<!--INJECT_EVENTS-->
+        </div>
+        <p class="pure-footer-note">
+          資料來源：<a href="GALLERY_URL_PLACEHOLDER" target="_blank" rel="noreferrer noopener">輔仁大學國際經營管理碩士班(imMBA) 官網｜活動集錦</a>
+        </p>
+      </section>
+    </main>
+    <!-- 內嵌專案 data/events.json：file:// 開啟時 fetch 會失敗，活動後台改由此載入預設列表 -->
+    <script type="application/json" id="pea-embedded-events">
+<!--INJECT_EVENTS_EMBED_JSON-->
+    </script>
+    <script src="./assets/pure-localstorage-sync.js" defer></script>
+    <script src="./assets/pure-events-admin.js" defer></script>
+  </body>
+</html>

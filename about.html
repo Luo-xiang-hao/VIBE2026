@@ -11,92 +11,75 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./assets/styles.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <header class="site-header">
-      <div class="header-hero">
-        <div class="header-top">
-          <div class="container header-top-inner">
-            <a class="header-brand" href="./index.html" aria-label="imMBA 首頁">
-              <span class="header-logo-wrap">
-                <img
-                  class="header-logo"
-                  src="./assets/immba-logo-200.svg"
-                  alt=""
-                  width="200"
-                  height="200"
-                  decoding="async"
-                />
-              </span>
-              <div class="header-title">
-                <span class="im">imMBA</span>
-                <span class="zh">輔仁大學國際經營管理碩士班</span>
-              </div>
-            </a>
-            <div class="header-lang">
-              <a class="lang-btn" href="./en/index.html" aria-label="切換為英文版 English">
-                <span class="lang-pill">EN</span>
-                <span class="lang-hint">English</span>
-              </a>
-            </div>
-          </div>
-        </div>
+    <a class="skip-link" href="#main">跳到主要內容</a>
 
-        <div class="header-hero-nav navwrap">
-        <div class="container nav-inner">
-          <nav class="nav" aria-label="主選單">
-            <ul class="nav-list nav-list--main">
-              <li class="nav-item">
-                <a class="nav-link" href="./about.html" aria-current="page">簡介 <span class="chev" aria-hidden="true">▾</span></a>
-                <div class="dropdown-menu" role="menu" aria-label="簡介">
-                  <a href="./about-features.html" role="menuitem">特色與排名</a>
-                  <a href="./about-rules.html" role="menuitem">本單位規定及辦法</a>
-                  <a href="./about-environment.html" role="menuitem">學習環境</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./admissions.html"
-                  >招生資訊 <span class="chev" aria-hidden="true">▾</span></a
-                >
-                <div class="dropdown-menu" role="menu" aria-label="招生資訊">
-                  <a href="./admissions-mba.html" role="menuitem">MBA招生資訊</a>
-                  <a href="./admissions-scholarships.html" role="menuitem">獎助學金資訊</a>
-                </div>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="./academics.html"
-                  >課程資訊 <span class="chev" aria-hidden="true">▾</span></a
-                >
-                <div class="dropdown-menu" role="menu" aria-label="課程資訊">
-                  <a href="./academics-curriculum.html" role="menuitem">課程與修業規則</a>
-                </div>
-              </li>
-              <li class="nav-item"><a class="nav-link" href="./faculty.html">師資介紹</a></li>
-              <li class="nav-item"><a class="nav-link" href="./guide.html">imMBA全攻略</a></li>
-              <li class="nav-item"><a class="nav-link" href="./graduation.html">畢業與離校</a></li>
-              <li class="nav-item"><a class="nav-link" href="./dualDegree.html">跨國雙碩士</a></li>
-              <li class="nav-item"><a class="nav-link" href="./exchange.html">海外交換</a></li>
-              <li class="nav-item"><a class="nav-link" href="./gallery.html">活動集錦</a></li>
-              <li class="nav-item"><a class="nav-link" href="./downloads.html">表格下載</a></li>
-            </ul>
-            <div class="nav-trailing">
-              <div class="nav-cta">
-                <a class="btn btn-primary nav-cta-round" href="./admissions.html">立即申請</a>
+    <header class="site-header site-header-v2">
+      <div class="site-header-v2-bg">
+        <div class="container site-header-v2-top">
+          <a class="brand-v2" href="./admin/dashboard.html" aria-label="進入 imMBA 官方網站後台管理中心">
+            <div class="logo-mark" aria-hidden="true">
+              <div class="logo-cap">
+                <span class="logo-cap-top"></span>
+                <span class="logo-cap-board"></span>
+                <span class="logo-cap-tassel"></span>
               </div>
-              <ul class="nav-list nav-list--meta" aria-label="公告與外部連結">
-                <li class="nav-item">
-                  <a class="nav-link" href="./announcements.html">公告</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="https://www.management.fju.edu.tw/" target="_blank" rel="noreferrer"
-                    >輔大管理學院</a
-                  >
-                </li>
-                <li class="nav-item"><a class="nav-link" href="./en/index.html">EN</a></li>
-              </ul>
+              <div class="logo-globe">
+                <span class="logo-globe-glow"></span>
+                <span class="logo-globe-ring logo-globe-ring--lat1"></span>
+                <span class="logo-globe-ring logo-globe-ring--lat2"></span>
+                <span class="logo-globe-ring logo-globe-ring--merid"></span>
+                <div class="logo-mid-band">
+                  <span class="logo-rule"></span>
+                  <span class="logo-title-inner">imMBA</span>
+                  <span class="logo-rule"></span>
+                </div>
+              </div>
             </div>
+            <span class="brand-v2-subtitle brand-v2-subtitle--aside">輔仁大學國際經營管理碩士班(imMBA)</span>
+          </a>
+          <nav class="header-util-bar" aria-label="頂部工具列">
+            <a href="./announcements.html">公告</a>
+            <span class="header-util-sep" aria-hidden="true">|</span>
+            <a href="https://www.management.fju.edu.tw/" target="_blank" rel="noreferrer">輔大管理學院</a>
+            <span class="header-util-sep" aria-hidden="true">|</span>
+            <a href="./en.html" lang="en">EN</a>
           </nav>
         </div>
+
+        <div class="site-header-v2-nav-wrap">
+          <div class="container site-header-v2-nav-inner">
+            <nav class="nav-v2" id="navMenu" aria-label="主選單">
+              <ul class="nav-v2-main" id="navList">
+                <li class="nav-v2-item">
+                  <a href="./about.html" aria-current="page">簡介</a>
+                </li>
+                <li class="nav-v2-item nav-v2-item--has-sub">
+                  <a href="./admissions.html">招生資訊 <span class="nav-v2-chev" aria-hidden="true">▾</span></a>
+                  <ul class="nav-v2-dropdown">
+                    <li><a href="./admissions-mba.html">MBA招生資訊</a></li>
+                    <li><a href="./admissions-scholarships.html">獎助學金資訊</a></li>
+                  </ul>
+                </li>
+                <li class="nav-v2-item nav-v2-item--has-sub">
+                  <a href="./academics.html">課程資訊 <span class="nav-v2-chev" aria-hidden="true">▾</span></a>
+                  <ul class="nav-v2-dropdown">
+                    <li><a href="./academics-curriculum.html">課程與修業規則</a></li>
+                  </ul>
+                </li>
+                <li class="nav-v2-item"><a href="./faculty.html">師資介紹</a></li>
+                <li class="nav-v2-item"><a href="./guide.html">imMBA 全攻略</a></li>
+                <li class="nav-v2-item"><a href="./graduation.html">畢業與離校</a></li>
+                <li class="nav-v2-item"><a href="./dualDegree.html">跨國雙碩士</a></li>
+                <li class="nav-v2-item"><a href="./exchange.html">海外交換</a></li>
+                <li class="nav-v2-item">
+                  <a href="./gallery.html">活動集錦</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
     </header>
@@ -156,17 +139,23 @@
               <li><a href="./downloads.html">表格下載</a></li>
               <li><a href="./contact.html">聯絡我們</a></li>
               <li><a href="./announcements.html">公告</a></li>
+              <li><a href="./gallery.html">活動集錦</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <div class="footer-h">備註</div>
-            <p class="footer-note">本網站為新版重建範本，內容以舊站架構為參考，細節可再補齊與更新。</p>
+            <p class="footer-note">
+              本網站為新版重建範本，內容以舊站架構為參考，細節可再補齊與更新。
+            </p>
           </div>
         </div>
       </div>
       <div class="container footer-bottom">
         <div class="copy">© <span id="year"></span> imMBA · FJCU</div>
-        <a class="to-top" href="./index.html">回到頂部</a>
+        <div class="footer-actions">
+          <a class="to-top" href="./index.html">回到頂部</a>
+          <a class="to-top" href="./en.html" lang="en">EN</a>
+        </div>
       </div>
     </footer>
 

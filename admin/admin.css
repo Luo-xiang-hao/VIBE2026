@@ -1,0 +1,191 @@
+/**
+ * 與前台 index（assets/styles.css body）相同色系：深藍底＋青／藍光暈
+ */
+.admin-page {
+  margin: 0;
+  min-height: 100vh;
+  font-family: Inter, "Noto Sans TC", system-ui, sans-serif;
+  color: rgba(255, 255, 255, 0.92);
+  background: radial-gradient(1200px 600px at 15% 10%, rgba(26, 163, 255, 0.36), transparent 60%),
+    radial-gradient(900px 520px at 85% 12%, rgba(40, 240, 211, 0.28), transparent 55%),
+    radial-gradient(900px 520px at 60% 88%, rgba(255, 204, 51, 0.16), transparent 55%),
+    linear-gradient(180deg, #070b13 0%, #0b1220 60%, #070b13 100%);
+  -webkit-font-smoothing: antialiased;
+}
+
+.admin-panel {
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.25);
+}
+
+.admin-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  background-color: #060d14;
+  background-image: radial-gradient(ellipse 120% 85% at 0% 0%, rgba(26, 99, 180, 0.45), transparent 52%),
+    radial-gradient(ellipse 90% 70% at 100% 20%, rgba(18, 72, 58, 0.55), transparent 50%),
+    linear-gradient(105deg, #0a1a2e 0%, #0c2430 38%, #071a14 72%, #050a0c 100%);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-input {
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(10, 18, 32, 0.72);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.admin-input::placeholder {
+  color: rgba(255, 255, 255, 0.38);
+}
+.admin-input:focus {
+  background: rgba(12, 22, 38, 0.88);
+  border-color: rgba(40, 240, 211, 0.45);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(40, 240, 211, 0.22);
+}
+
+.admin-input[readonly] {
+  cursor: default;
+  color: rgba(255, 255, 255, 0.78);
+  background: rgba(8, 14, 26, 0.55);
+}
+
+/**
+ * ?embed=1：隱藏與 React AdminChrome 重複的頂部；表單淺色。
+ * 直接開本頁（無 embed）：同樣淺色表單，並顯示 admin-html-chrome。
+ */
+html.admin-embed .admin-html-chrome {
+  display: none !important;
+}
+
+html.admin-embed .imo-section-card {
+  display: none !important;
+}
+
+html.admin-embed .imo-workspace__body {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0.35rem 0;
+}
+
+.admin-embed.admin-page {
+  background: #e8edf3;
+  color: #334155;
+}
+
+.admin-embed .admin-panel,
+.admin-news-standalone .admin-panel {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06);
+}
+
+.admin-embed .admin-input,
+.admin-news-standalone .admin-input {
+  color: #0f172a;
+  background: #fff;
+  border-color: #cbd5e1;
+}
+
+.admin-embed .admin-input::placeholder,
+.admin-news-standalone .admin-input::placeholder {
+  color: #94a3b8;
+}
+
+.admin-embed .admin-input:focus,
+.admin-news-standalone .admin-input:focus {
+  background: #fff;
+  border-color: #0284c7;
+  box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.2);
+}
+
+.admin-embed .admin-input[readonly],
+.admin-news-standalone .admin-input[readonly] {
+  color: #64748b;
+  background: #f8fafc;
+}
+
+.admin-embed .text-slate-100,
+.admin-news-standalone .text-slate-100 {
+  color: #0f172a !important;
+}
+
+.admin-embed .text-slate-200,
+.admin-news-standalone .text-slate-200 {
+  color: #334155 !important;
+}
+
+.admin-embed .text-slate-300,
+.admin-news-standalone .text-slate-300 {
+  color: #475569 !important;
+}
+
+.admin-embed .text-slate-400,
+.admin-news-standalone .text-slate-400 {
+  color: #64748b !important;
+}
+
+.admin-embed .text-slate-500,
+.admin-news-standalone .text-slate-500 {
+  color: #94a3b8 !important;
+}
+
+.admin-embed .text-white\/90,
+.admin-news-standalone .text-white\/90 {
+  color: #1e293b !important;
+}
+
+.admin-embed .text-cyan-200,
+.admin-news-standalone .text-cyan-200 {
+  color: #0369a1 !important;
+}
+
+.admin-embed .text-cyan-300,
+.admin-news-standalone .text-cyan-300 {
+  color: #0284c7 !important;
+}
+
+.admin-embed .text-rose-300,
+.admin-news-standalone .text-rose-300 {
+  color: #dc2626 !important;
+}
+
+.admin-embed .text-amber-100,
+.admin-news-standalone .text-amber-100 {
+  color: #92400e !important;
+}
+
+.admin-embed .text-amber-200,
+.admin-news-standalone .text-amber-200 {
+  color: #b45309 !important;
+}
+
+.admin-embed .bg-amber-400\/20,
+.admin-news-standalone .bg-amber-400\/20 {
+  background: #fef3c7 !important;
+}
+
+.admin-embed .border-white\/10,
+.admin-news-standalone .border-white\/10 {
+  border-color: #e2e8f0 !important;
+}
+
+.admin-embed .divide-white\/10 > :not([hidden]) ~ :not([hidden]),
+.admin-news-standalone .divide-white\/10 > :not([hidden]) ~ :not([hidden]) {
+  border-color: #f1f5f9 !important;
+}
+
+.admin-embed .bg-white\/\[0\.04\],
+.admin-news-standalone .bg-white\/\[0\.04\] {
+  background-color: #f8fafc !important;
+}
+
+.admin-embed tbody tr:hover,
+.admin-news-standalone tbody tr:hover {
+  background-color: #f1f5f9 !important;
+}
+
+.admin-news-main {
+  max-width: 64rem;
+}
